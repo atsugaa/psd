@@ -35,6 +35,7 @@
     <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="_static/myfile.css?v=bb5f16dc" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
   <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
@@ -60,7 +61,7 @@
     <script>DOCUMENTATION_OPTIONS.pagename = 'laporan';</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="&lt;no title&gt;" href="tes.html" />
+    <link rel="next" title="Laporan Versi 2" href="tes.html" />
     <link rel="prev" title="Selamat Datang" href="intro.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -181,6 +182,7 @@
         </ul>
         <ul class="current nav bd-sidenav">
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Laporan Proyek Sains Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tes.html">Laporan Versi 2</a></li>
 </ul>
 
     </div>
@@ -331,17 +333,29 @@ document.write(`
                 <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pendahuluan">Pendahuluan</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#latar-belakang">Latar Belakang</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tujuan">Tujuan</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#masalah">Masalah</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tujuan">Tujuan</a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#metodologi">Metodologi</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#memahami-data-data-understanding">Memahami Data (Data Understanding)</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pra-pemrosesan-data-data-preprocessing">Pra-pemrosesan Data (Data Preprocessing)</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pemodelan-data-data-modelling">Pemodelan Data (Data Modelling)</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#evaluasi">Evaluasi</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#memahami-data-data-understanding">Memahami Data (Data Understanding)</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#pengumpulan-data">Pengumpulan Data</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#deskripsi-data">Deskripsi Data</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#verifikasi-kualitas-data">Verifikasi Kualitas Data</a></li>
 </ul>
 </li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pra-pemrosesan-data-data-preprocessing">Pra-pemrosesan Data (Data Preprocessing)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pemodelan-data-data-modelling">Pemodelan Data (Data Modelling)</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#memilih-model">Memilih Model</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#membangun-model">Membangun Model</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#menilai-model">Menilai Model</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#evaluasi">Evaluasi</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#deployment">Deployment</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#daftar-rujukan">Daftar Rujukan</a></li>
 </ul>
             </nav>
         </div>
@@ -359,42 +373,49 @@ document.write(`
 <h2>Pendahuluan<a class="headerlink" href="#pendahuluan" title="Link to this heading">#</a></h2>
 <section id="latar-belakang">
 <h3>Latar Belakang<a class="headerlink" href="#latar-belakang" title="Link to this heading">#</a></h3>
-<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-</section>
-<section id="tujuan">
-<h3>Tujuan<a class="headerlink" href="#tujuan" title="Link to this heading">#</a></h3>
-<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+<p>X minerals Indonesia merupakan perusahaan pertambangan indonesia yang memiliki visi menjadi perusahaan pertambangan indonesia yang terkemuka. Perusahaan ini memiliki salah satu misi yaitu memaksimalkan nilai bagi pemegang saham. Untuk dapat mencapai visi misi perusahaan diperlukan untuk mengetahui harga saham perusahaan kedepannya.</p>
+<p>Saham adalah surat berharga yang menunjukkan kepemilikan seseorang dalam suatu perusahaan. Tujuan perusahaan menerbitkan saham adalah untuk mendapatkan dana dari pihak yang ingin menanamkan modal untuk mendapatkan keuntungan di masa depan, dana tersebut dapat digunakan untuk mengembangkan bisnis di perusahaan. Saham bersifat fluktuatif, bisa naik bisa turun sama halnya dengan harga barang atau komoditi di pasar. Bagi beberapa orang disanalah seninya, bila pasar statis tidak akan menarik minat investor. Naik turunnya harga saham juga dapat dipengaruhi oleh kinerja perusahaan, semakin baik kinerja perusahaan, maka dapat dipastikan harga saham perusahaan juga naik.</p>
 </section>
 <section id="masalah">
 <h3>Masalah<a class="headerlink" href="#masalah" title="Link to this heading">#</a></h3>
-<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+<p>X minerals indonesia yang memiliki salah satu misi yaitu memaksimalkan nilai bagi pemegang saham. Untuk dapat mencapai visi misi perusahaan diperlukan untuk mengetahui harga saham perusahaan kedepannya. Dalam mengetahui harga saham perusahaan dimasa mendatang diperlukan teknik peramalan.</p>
+</section>
+<section id="tujuan">
+<h3>Tujuan<a class="headerlink" href="#tujuan" title="Link to this heading">#</a></h3>
+<p>Dengan dilakukannya peramalan harga saham x minerals indonesia, diharapkan dapat menjadi indikator kinerja perusahaan dan perusahaan dapat mengantisipasi jika diramalkan harga saham turun dikemudian hari, dengan begitu kinerja perusahaan dapat selalu baik dan harga saham dapat terjaga. Hal ini dapat mencapai salah satu misi perusahaan yaitu memaksimalkan nilai bagi pemegang saham.</p>
 </section>
 </section>
 <section id="metodologi">
 <h2>Metodologi<a class="headerlink" href="#metodologi" title="Link to this heading">#</a></h2>
 <section id="memahami-data-data-understanding">
 <h3>Memahami Data (Data Understanding)<a class="headerlink" href="#memahami-data-data-understanding" title="Link to this heading">#</a></h3>
+<section id="pengumpulan-data">
+<h4>Pengumpulan Data<a class="headerlink" href="#pengumpulan-data" title="Link to this heading">#</a></h4>
 <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
 tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
 quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
 consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
 cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
 proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+</section>
+<section id="deskripsi-data">
+<h4>Deskripsi Data<a class="headerlink" href="#deskripsi-data" title="Link to this heading">#</a></h4>
+<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+</section>
+<section id="verifikasi-kualitas-data">
+<h4>Verifikasi Kualitas Data<a class="headerlink" href="#verifikasi-kualitas-data" title="Link to this heading">#</a></h4>
+<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+</section>
 </section>
 <section id="pra-pemrosesan-data-data-preprocessing">
 <h3>Pra-pemrosesan Data (Data Preprocessing)<a class="headerlink" href="#pra-pemrosesan-data-data-preprocessing" title="Link to this heading">#</a></h3>
@@ -407,12 +428,33 @@ proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
 </section>
 <section id="pemodelan-data-data-modelling">
 <h3>Pemodelan Data (Data Modelling)<a class="headerlink" href="#pemodelan-data-data-modelling" title="Link to this heading">#</a></h3>
+<section id="memilih-model">
+<h4>Memilih Model<a class="headerlink" href="#memilih-model" title="Link to this heading">#</a></h4>
 <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
 tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
 quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
 consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
 cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
 proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+</section>
+<section id="membangun-model">
+<h4>Membangun Model<a class="headerlink" href="#membangun-model" title="Link to this heading">#</a></h4>
+<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+</section>
+<section id="menilai-model">
+<h4>Menilai Model<a class="headerlink" href="#menilai-model" title="Link to this heading">#</a></h4>
+<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+</section>
 </section>
 <section id="evaluasi">
 <h3>Evaluasi<a class="headerlink" href="#evaluasi" title="Link to this heading">#</a></h3>
@@ -423,6 +465,24 @@ consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
 cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
 proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
 </section>
+<section id="deployment">
+<h3>Deployment<a class="headerlink" href="#deployment" title="Link to this heading">#</a></h3>
+<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+</section>
+</section>
+<section id="daftar-rujukan">
+<h2>Daftar Rujukan<a class="headerlink" href="#daftar-rujukan" title="Link to this heading">#</a></h2>
+<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
 </section>
 </section>
 
@@ -470,7 +530,7 @@ proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">&lt;no title&gt;</p>
+        <p class="prev-next-title">Laporan Versi 2</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -492,17 +552,29 @@ proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pendahuluan">Pendahuluan</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#latar-belakang">Latar Belakang</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tujuan">Tujuan</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#masalah">Masalah</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tujuan">Tujuan</a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#metodologi">Metodologi</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#memahami-data-data-understanding">Memahami Data (Data Understanding)</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pra-pemrosesan-data-data-preprocessing">Pra-pemrosesan Data (Data Preprocessing)</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pemodelan-data-data-modelling">Pemodelan Data (Data Modelling)</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#evaluasi">Evaluasi</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#memahami-data-data-understanding">Memahami Data (Data Understanding)</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#pengumpulan-data">Pengumpulan Data</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#deskripsi-data">Deskripsi Data</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#verifikasi-kualitas-data">Verifikasi Kualitas Data</a></li>
 </ul>
 </li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pra-pemrosesan-data-data-preprocessing">Pra-pemrosesan Data (Data Preprocessing)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pemodelan-data-data-modelling">Pemodelan Data (Data Modelling)</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#memilih-model">Memilih Model</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#membangun-model">Membangun Model</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#menilai-model">Menilai Model</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#evaluasi">Evaluasi</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#deployment">Deployment</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#daftar-rujukan">Daftar Rujukan</a></li>
 </ul>
   </nav></div>
 
