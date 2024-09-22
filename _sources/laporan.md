@@ -19,13 +19,13 @@ kernelspec:
 
 ### Latar Belakang
 
-X minerals Indonesia merupakan perusahaan pertambangan indonesia yang memiliki visi menjadi perusahaan pertambangan indonesia yang terkemuka. Perusahaan ini memiliki salah satu misi yaitu memaksimalkan nilai bagi pemegang saham. Untuk dapat mencapai visi misi perusahaan diperlukan untuk mengetahui harga saham perusahaan kedepannya.
+Adaro minerals Indonesia merupakan perusahaan pertambangan indonesia yang memiliki visi menjadi perusahaan pertambangan indonesia yang terkemuka. Perusahaan ini memiliki salah satu misi yaitu memaksimalkan nilai bagi pemegang saham. Untuk dapat mencapai visi misi perusahaan diperlukan untuk mengetahui harga saham perusahaan kedepannya.
 
 Saham adalah surat berharga yang menunjukkan kepemilikan seseorang dalam suatu perusahaan. Tujuan perusahaan menerbitkan saham adalah untuk mendapatkan dana dari pihak yang ingin menanamkan modal untuk mendapatkan keuntungan di masa depan, dana tersebut dapat digunakan untuk mengembangkan bisnis di perusahaan. Saham bersifat fluktuatif, bisa naik bisa turun sama halnya dengan harga barang atau komoditi di pasar. Bagi beberapa orang disanalah seninya, bila pasar statis tidak akan menarik minat investor. Naik turunnya harga saham juga dapat dipengaruhi oleh kinerja perusahaan, semakin baik kinerja perusahaan, maka dapat dipastikan harga saham perusahaan juga naik.
 
 ### Masalah
 
-X minerals indonesia yang memiliki salah satu misi yaitu memaksimalkan nilai bagi pemegang saham. Untuk dapat mencapai misi perusahaan tersebut diperlukan untuk mengetahui harga saham perusahaan kedepannya. Selain itu juga, harga saham yang menurun dalam jangka waktu yang lama dapat membuat investor menjadi hilang kepercayaan kepada perusahaan, hal itu dapat menghambat perkembangan perusahaan. Oleh karena itu muncul ide untuk melakukan peramalan harga saham dimasa mendatang.
+Adaro minerals indonesia yang memiliki salah satu misi yaitu memaksimalkan nilai bagi pemegang saham. Untuk dapat mencapai misi perusahaan tersebut diperlukan untuk mengetahui harga saham perusahaan kedepannya. Selain itu juga, harga saham yang menurun dalam jangka waktu yang lama dapat membuat investor menjadi hilang kepercayaan kepada perusahaan, hal itu dapat menghambat perkembangan perusahaan. Oleh karena itu muncul ide untuk melakukan peramalan harga saham dimasa mendatang.
 
 ### Tujuan
 
@@ -38,11 +38,137 @@ Dengan dilakukannya peramalan harga saham x minerals indonesia, diharapkan dapat
 
 #### Pengumpulan Data
 
-Pada tahap ini dilakukan pengumpulan data yang diperlukan untuk proyek, menjelaskan detail saat pengumpulan data seperti sumber data, kondisi data, jumlah data.
+Proyek ini menggunakan data time series dari data historis perdagangan saham harian perusahaan Adaro (ADARO) selama 5 tahun dari 22 Agustus 2019 sampai 20 September 2024 yang didapat dari situs web [Google Finance](https://www.google.com/finance/quote/ADRO:IDX?hl=en&window=5Y) yang datanya bersumber langsung dari Bursa Efek Indonesia yang bertanggung jawab dalam menyediakan semua sarana perdagangan efek dan membuat peraturan yang berkaitan dengan kegiatan bursa di Indonesia. Data yang diambil berformat CSV (Comma-separated value) yang berisikan 1234 baris perdagangan saham.
+
+```{code-cell}
+#import library
+import pandas as pd
+```
+```{code-cell}
+# Load data
+df = pd.read_csv('https://raw.githubusercontent.com/atsugaa/psd/refs/heads/main/ADRO.csv', parse_dates = True, low_memory = False, index_col = 'Date')
+pd.options.display.float_format = '{:.0f}'.format
+df.head()
+```
 
 #### Deskripsi Data
 
-Pada tahap ini akan menjelaskan gambaran data yang digunakan seperti menjelaskan fitur fitur data, tipe data, dan lainnya.
+Data saham berupa csv berisikan 1234 baris dan 6 kolom yang merupakan :
+
+- Date : Tanggal perdagangan saham yang berformat yyyy-mm-dd hh:mm:ss
+- Open : Harga saat pasar saham dibuka ditanggal tertentu (pukul 9 pagi)
+- High : Harga tertinggi yang pernah dicapai ditanggal tertentu
+- Low : Harga terendah yang pernah dicapai ditanggal tertentu
+- Close : Harga terakhir saham dalam rupiah saat pasar saham ditutup hari itu (pukul 3 sore)
+- Volume : Besaran transaksi yang terjadi ditanggal tersebut dalam jutaan
+
+
+```{code-cell}
+df['Volume']
+```
+```{code-cell}
+df.dtypes
+```
+```{code-cell}
+df.describe()
+```
+```{code-cell}
+df.info()
+```
+
+Terbaca hanya 5 kolom karena kolom Date (tanggal) telah dijadikan indeks untuk memudahkan nantinya.
+
+#### Eksplorasi Data
+
+Melihat tiap tiap kolom yang memiliki nilai 0
+
+```{code-cell}
+#Data Open yang memiliki nilai 0
+zero_open = df[df.Open == 0]
+print("In total: ", zero_open.shape)
+df.Open.isna().sum()
+zero_open.head(5)
+```
+
+Terlihat bahwa kolom Open tidak memiliki nilai 0
+
+
+```{code-cell}
+#Data High yang memiliki nilai 0
+zero_high = df[df.High == 0]
+print("In total: ", zero_high.shape)
+df.High.isna().sum()
+zero_high.head(5)
+```
+
+Terlihat bahwa kolom High tidak memiliki nilai 0
+
+
+```{code-cell}
+#Data Low yang memiliki nilai 0
+zero_low = df[df.Low == 0]
+print("In total: ", zero_low.shape)
+df.Low.isna().sum()
+zero_low.head(5)
+```
+
+Terlihat bahwa kolom Low tidak memiliki nilai 0
+
+```{code-cell}
+#Data Close yang memiliki nilai 0
+zero_close = df[df.Close == 0]
+print("In total: ", zero_close.shape)
+df.Close.isna().sum()
+zero_close.head(5)
+```
+
+Terlihat bahwa kolom Close tidak memiliki nilai 0
+
+```{code-cell}
+#Data Volume yang memiliki nilai 0
+zero_volume = df[df.Volume == 0]
+print("In total: ", zero_volume.shape)
+zero_volume
+```
+
+Terlihat bahwa kolom Volume tidak memiliki nilai 0.
+
+Selanjutnya melihat apakah data terdapat outlier
+
+```{code-cell}
+import numpy as np
+import matplotlib.pyplot as plt
+numeric_cols = df
+fig, ax = plt.subplots()
+ax.boxplot(numeric_cols)
+df.describe()
+```
+
+Selanjutnya melihat data trend di masing-masing kolom
+
+
+```{code-cell}
+#Data Trend
+for i in df:
+  df[i].plot(kind='line', figsize=(8, 4), title=i)
+  plt.show()
+```
+
+Selanjutnya melihat korelasi antara kolom satu dengan kolom lainnya
+
+
+```{code-cell}
+import seaborn as sns
+df_corr = df.corr()
+
+# Menyiapkan gambar matplotlib
+f, ax = plt.subplots(figsize=(11, 9))
+
+# Membuat heatmap dengan mask dan proporsi aspek yang benar
+sns.heatmap(df_corr, square=True, annot=True, linewidths=0.5, ax=ax, cmap="BuPu")
+plt.show()
+```
+
 
 #### Verifikasi Kualitas Data
 
