@@ -1,0 +1,62 @@
+Traceback (most recent call last):
+  File "C:\Users\atsuga\AppData\Local\Programs\Python\Python312\Lib\site-packages\jupyter_cache\executors\utils.py", line 58, in single_nb_execution
+    executenb(
+  File "C:\Users\atsuga\AppData\Local\Programs\Python\Python312\Lib\site-packages\nbclient\client.py", line 1314, in execute
+    return NotebookClient(nb=nb, resources=resources, km=km, **kwargs).execute()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\atsuga\AppData\Local\Programs\Python\Python312\Lib\site-packages\jupyter_core\utils\__init__.py", line 165, in wrapped
+    return loop.run_until_complete(inner)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\atsuga\AppData\Local\Programs\Python\Python312\Lib\asyncio\base_events.py", line 687, in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+  File "C:\Users\atsuga\AppData\Local\Programs\Python\Python312\Lib\site-packages\nbclient\client.py", line 709, in async_execute
+    await self.async_execute_cell(
+  File "C:\Users\atsuga\AppData\Local\Programs\Python\Python312\Lib\site-packages\nbclient\client.py", line 1062, in async_execute_cell
+    await self._check_raise_for_error(cell, cell_index, exec_reply)
+  File "C:\Users\atsuga\AppData\Local\Programs\Python\Python312\Lib\site-packages\nbclient\client.py", line 918, in _check_raise_for_error
+    raise CellExecutionError.from_cell_and_msg(cell, exec_reply_content)
+nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
+------------------
+#Data Trend
+for i in df:
+  df[i].plot(kind='line', figsize=(8, 4), title=i)
+  plt.show()
+------------------
+
+
+[1;31m---------------------------------------------------------------------------[0m
+[1;31mTypeError[0m                                 Traceback (most recent call last)
+Cell [1;32mIn[8], line 3[0m
+[0;32m      1[0m [38;5;66;03m#Data Trend[39;00m
+[0;32m      2[0m [38;5;28;01mfor[39;00m i [38;5;129;01min[39;00m df:
+[1;32m----> 3[0m   [43mdf[49m[43m[[49m[43mi[49m[43m][49m[38;5;241;43m.[39;49m[43mplot[49m[43m([49m[43mkind[49m[38;5;241;43m=[39;49m[38;5;124;43m'[39;49m[38;5;124;43mline[39;49m[38;5;124;43m'[39;49m[43m,[49m[43m [49m[43mfigsize[49m[38;5;241;43m=[39;49m[43m([49m[38;5;241;43m8[39;49m[43m,[49m[43m [49m[38;5;241;43m4[39;49m[43m)[49m[43m,[49m[43m [49m[43mtitle[49m[38;5;241;43m=[39;49m[43mi[49m[43m)[49m
+[0;32m      4[0m   plt[38;5;241m.[39mshow()
+
+File [1;32m~\AppData\Local\Programs\Python\Python312\Lib\site-packages\pandas\plotting\_core.py:1030[0m, in [0;36mPlotAccessor.__call__[1;34m(self, *args, **kwargs)[0m
+[0;32m   1027[0m             label_name [38;5;241m=[39m label_kw [38;5;129;01mor[39;00m data[38;5;241m.[39mcolumns
+[0;32m   1028[0m             data[38;5;241m.[39mcolumns [38;5;241m=[39m label_name
+[1;32m-> 1030[0m [38;5;28;01mreturn[39;00m [43mplot_backend[49m[38;5;241;43m.[39;49m[43mplot[49m[43m([49m[43mdata[49m[43m,[49m[43m [49m[43mkind[49m[38;5;241;43m=[39;49m[43mkind[49m[43m,[49m[43m [49m[38;5;241;43m*[39;49m[38;5;241;43m*[39;49m[43mkwargs[49m[43m)[49m
+
+File [1;32m~\AppData\Local\Programs\Python\Python312\Lib\site-packages\pandas\plotting\_matplotlib\__init__.py:71[0m, in [0;36mplot[1;34m(data, kind, **kwargs)[0m
+[0;32m     69[0m         kwargs[[38;5;124m"[39m[38;5;124max[39m[38;5;124m"[39m] [38;5;241m=[39m [38;5;28mgetattr[39m(ax, [38;5;124m"[39m[38;5;124mleft_ax[39m[38;5;124m"[39m, ax)
+[0;32m     70[0m plot_obj [38;5;241m=[39m PLOT_CLASSES[kind](data, [38;5;241m*[39m[38;5;241m*[39mkwargs)
+[1;32m---> 71[0m [43mplot_obj[49m[38;5;241;43m.[39;49m[43mgenerate[49m[43m([49m[43m)[49m
+[0;32m     72[0m plot_obj[38;5;241m.[39mdraw()
+[0;32m     73[0m [38;5;28;01mreturn[39;00m plot_obj[38;5;241m.[39mresult
+
+File [1;32m~\AppData\Local\Programs\Python\Python312\Lib\site-packages\pandas\plotting\_matplotlib\core.py:499[0m, in [0;36mMPLPlot.generate[1;34m(self)[0m
+[0;32m    497[0m [38;5;129m@final[39m
+[0;32m    498[0m [38;5;28;01mdef[39;00m [38;5;21mgenerate[39m([38;5;28mself[39m) [38;5;241m-[39m[38;5;241m>[39m [38;5;28;01mNone[39;00m:
+[1;32m--> 499[0m     [38;5;28;43mself[39;49m[38;5;241;43m.[39;49m[43m_compute_plot_data[49m[43m([49m[43m)[49m
+[0;32m    500[0m     fig [38;5;241m=[39m [38;5;28mself[39m[38;5;241m.[39mfig
+[0;32m    501[0m     [38;5;28mself[39m[38;5;241m.[39m_make_plot(fig)
+
+File [1;32m~\AppData\Local\Programs\Python\Python312\Lib\site-packages\pandas\plotting\_matplotlib\core.py:698[0m, in [0;36mMPLPlot._compute_plot_data[1;34m(self)[0m
+[0;32m    696[0m [38;5;66;03m# no non-numeric frames or series allowed[39;00m
+[0;32m    697[0m [38;5;28;01mif[39;00m is_empty:
+[1;32m--> 698[0m     [38;5;28;01mraise[39;00m [38;5;167;01mTypeError[39;00m([38;5;124m"[39m[38;5;124mno numeric data to plot[39m[38;5;124m"[39m)
+[0;32m    700[0m [38;5;28mself[39m[38;5;241m.[39mdata [38;5;241m=[39m numeric_data[38;5;241m.[39mapply([38;5;28mtype[39m([38;5;28mself[39m)[38;5;241m.[39m_convert_to_ndarray)
+
+[1;31mTypeError[0m: no numeric data to plot
+

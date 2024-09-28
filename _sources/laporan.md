@@ -38,7 +38,7 @@ Dengan dilakukannya peramalan harga saham x minerals indonesia, diharapkan dapat
 
 #### Pengumpulan Data
 
-Proyek ini menggunakan data time series dari data historis perdagangan saham harian perusahaan Adaro (ADARO) selama 5 tahun dari 22 Agustus 2019 sampai 20 September 2024 yang didapat dari situs web [Google Finance](https://www.google.com/finance/quote/ADRO:IDX?hl=en&window=5Y) yang datanya bersumber langsung dari Bursa Efek Indonesia yang bertanggung jawab dalam menyediakan semua sarana perdagangan efek dan membuat peraturan yang berkaitan dengan kegiatan bursa di Indonesia. Data yang diambil berformat CSV (Comma-separated value) yang berisikan 1234 baris perdagangan saham.
+Proyek ini menggunakan data time series dari data historis perdagangan saham harian perusahaan Adaro (ADARO) selama hari kerja dalam jangka waktu 5 tahun dari 22 Agustus 2019 sampai 20 September 2024 yang didapat dari situs web [Google Finance](https://www.google.com/finance/quote/ADRO:IDX?hl=en&window=5Y) yang datanya bersumber langsung dari Bursa Efek Indonesia yang bertanggung jawab dalam menyediakan semua sarana perdagangan efek dan membuat peraturan yang berkaitan dengan kegiatan bursa di Indonesia. Data yang diambil berformat CSV (Comma-separated value) yang berisikan 1234 baris perdagangan saham.
 
 ```{code-cell}
 #import library
@@ -46,7 +46,7 @@ import pandas as pd
 ```
 ```{code-cell}
 # Load data
-df = pd.read_csv('https://raw.githubusercontent.com/atsugaa/psd/refs/heads/main/ADRO.csv', parse_dates = True, low_memory = False, index_col = 'Date')
+df = pd.read_csv('https://raw.githubusercontent.com/atsugaa/psd/refs/heads/main/ADRO.csv')
 pd.options.display.float_format = '{:.0f}'.format
 df.head()
 ```
@@ -63,9 +63,8 @@ Data saham berupa csv berisikan 1234 baris dan 6 kolom yang merupakan :
 - Volume : Besaran transaksi yang terjadi ditanggal tersebut dalam jutaan
 
 
-```{code-cell}
-df['Volume']
-```
+Melihat tipe data dari masing masing kolom.
+
 ```{code-cell}
 df.dtypes
 ```
@@ -75,75 +74,36 @@ df.describe()
 ```{code-cell}
 df.info()
 ```
+Terbaca bahwa dari 1234 baris data tiap kolomnya tidak ada baris yang kosong (null).
 
-Terbaca hanya 5 kolom karena kolom Date (tanggal) telah dijadikan indeks untuk memudahkan nantinya.
 
 #### Eksplorasi Data
 
-Melihat tiap tiap kolom yang memiliki nilai 0
+Sebelum melanjutkan eksplorasi data, terlebih dahulu menghapus jam, menit, dan detik dari kolom tanggal (Date) dan menjadikannya sebagai index dari data agar memudahkan prosesnya, Hasilnya seperti dibawah.
 
 ```{code-cell}
-#Data Open yang memiliki nilai 0
-zero_open = df[df.Open == 0]
-print("In total: ", zero_open.shape)
-df.Open.isna().sum()
-zero_open.head(5)
+df['Date'] = pd.to_datetime(df['Date'], dayfirst=True).dt.date
+df.set_index('Date', inplace=True)
+df.index = pd.to_datetime(df.index)
+df.head()
 ```
 
-Terlihat bahwa kolom Open tidak memiliki nilai 0
-
-
-```{code-cell}
-#Data High yang memiliki nilai 0
-zero_high = df[df.High == 0]
-print("In total: ", zero_high.shape)
-df.High.isna().sum()
-zero_high.head(5)
-```
-
-Terlihat bahwa kolom High tidak memiliki nilai 0
-
-
-```{code-cell}
-#Data Low yang memiliki nilai 0
-zero_low = df[df.Low == 0]
-print("In total: ", zero_low.shape)
-df.Low.isna().sum()
-zero_low.head(5)
-```
-
-Terlihat bahwa kolom Low tidak memiliki nilai 0
-
-```{code-cell}
-#Data Close yang memiliki nilai 0
-zero_close = df[df.Close == 0]
-print("In total: ", zero_close.shape)
-df.Close.isna().sum()
-zero_close.head(5)
-```
-
-Terlihat bahwa kolom Close tidak memiliki nilai 0
-
-```{code-cell}
-#Data Volume yang memiliki nilai 0
-zero_volume = df[df.Volume == 0]
-print("In total: ", zero_volume.shape)
-zero_volume
-```
-
-Terlihat bahwa kolom Volume tidak memiliki nilai 0.
 
 Selanjutnya melihat apakah data terdapat outlier
 
 ```{code-cell}
 import numpy as np
 import matplotlib.pyplot as plt
-numeric_cols = df
-fig, ax = plt.subplots()
-ax.boxplot(numeric_cols)
-df.describe()
+import seaborn as sb
+features = ['Open', 'High', 'Low', 'Close', 'Volume']
+plt.subplots(figsize=(20,10))
+for i, col in enumerate(features):
+  plt.subplot(2,3,i+1)
+  sb.boxplot(df[col])
+plt.show()
 ```
 
+Terlihat hanya kolom Volume yang memiliki outlier.
 Selanjutnya melihat data trend di masing-masing kolom
 
 
@@ -169,10 +129,12 @@ sns.heatmap(df_corr, square=True, annot=True, linewidths=0.5, ax=ax, cmap="BuPu"
 plt.show()
 ```
 
+Terlihat tiap kolom kecuali kolom Volume memiliki nilai korelasi yang sangat tinggi (0.99-1), dapat diartikan bahwa tiap tiap kolom saling berhubungan satu sama lain kecuali kolom volume yang memiliki nilai korelasi negatif dengan kolom lainnya. Fitur yang ingin diprediksi adalah Close karena dengan mengetahui harga close di esok hari maka bisa menjadi sinyal untuk membeli saham jika harga prediksi close lebih besar dari harga close hari ini dan sebaliknya, maka perlu dilakukan seleksi fitur.
 
-#### Verifikasi Kualitas Data
-
-Pada tahap ini dilakukan evaluasi terhadap data untuk memastikan bahwa data cocok untuk digunakan, apa saja kekurangan data, tindakan apa yang diperlukan untuk mengatasi kekurangan dari data
+```{code-cell}
+train_df = df.filter(['Close'])
+train_df
+```
 
 ### Pra-pemrosesan Data (Data Preprocessing)
 
