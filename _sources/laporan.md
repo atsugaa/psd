@@ -43,8 +43,7 @@ Proyek ini menggunakan data time series dari data historis perdagangan saham har
 ```{code-cell}
 #import library
 import pandas as pd
-```
-```{code-cell}
+
 # Load data
 df = pd.read_csv('https://raw.githubusercontent.com/atsugaa/psd/refs/heads/main/ADRO.csv')
 pd.options.display.float_format = '{:.0f}'.format
@@ -103,7 +102,44 @@ for i, col in enumerate(features):
 plt.show()
 ```
 
-Terlihat hanya kolom Volume yang memiliki outlier.
+Terlihat hanya kolom Volume yang memiliki outlier. Maka dibutuhkan penanganan terhadap outlier di kolom Volume
+
+```{code-cell}
+def zscore(s, window, thresh=0, return_all=False):
+    roll = s.rolling(window=window, min_periods=1, center=True)
+    avg = roll.mean()
+    std = roll.std(ddof=0)
+    z = s.sub(avg).div(std)   
+    m = z.between(-thresh, thresh)
+    
+    if return_all:
+        return z, avg, std, m
+    return s.where(m, avg)
+
+
+z, avg, std, m = zscore(df['Volume'], window=50, return_all=True)
+
+ax = plt.subplot()
+
+df['Volume'].plot(label='data')
+avg.plot(label='mean')
+df.loc[~m, 'Volume'].plot(label='outliers', marker='o', ls='')
+avg[~m].plot(label='replacement', marker='o', ls='')
+plt.legend()
+```
+
+Perbandingan sebelum dan sesudah dilakukannya penanganan outlier
+
+```{code-cell}
+df_temp = zscore(df['Volume'], window=50)
+plt.subplots(figsize=(20,10))
+plt.subplot(1,2,1)
+sb.boxplot(df['Volume'])
+plt.subplot(1,2,2)
+sb.boxplot(df_temp)
+plt.show()
+```
+
 Selanjutnya melihat data trend di masing-masing kolom
 
 
@@ -120,6 +156,7 @@ Selanjutnya melihat korelasi antara kolom satu dengan kolom lainnya
 ```{code-cell}
 import seaborn as sns
 df_corr = df.corr()
+print(type(df_corr))
 
 # Menyiapkan gambar matplotlib
 f, ax = plt.subplots(figsize=(11, 9))
@@ -129,12 +166,11 @@ sns.heatmap(df_corr, square=True, annot=True, linewidths=0.5, ax=ax, cmap="BuPu"
 plt.show()
 ```
 
-Terlihat tiap kolom kecuali kolom Volume memiliki nilai korelasi yang sangat tinggi (0.99-1), dapat diartikan bahwa tiap tiap kolom saling berhubungan satu sama lain kecuali kolom volume yang memiliki nilai korelasi negatif dengan kolom lainnya. Fitur yang ingin diprediksi adalah Close karena dengan mengetahui harga close di esok hari maka bisa menjadi sinyal untuk membeli saham jika harga prediksi close lebih besar dari harga close hari ini dan sebaliknya, maka perlu dilakukan seleksi fitur.
+Terlihat tiap kolom kecuali kolom Volume memiliki nilai korelasi yang sangat tinggi (0.99-1), dapat diartikan bahwa tiap tiap kolom saling berhubungan satu sama lain kecuali kolom volume yang memiliki nilai korelasi negatif dengan kolom lainnya.
 
-```{code-cell}
-train_df = df.filter(['Close'])
-train_df
-```
+#### Verifikasi Kualitas Data
+
+Dapat disimpulkan bahwa data yang digunakan terbilang bagus dan cocok untuk dipakai dalam modelling, namun perlu diperhatikan bahwa data perlu masuk ke tahap preprocessing data agar data benar benar siap untuk masuk ke tahap modelling.
 
 ### Pra-pemrosesan Data (Data Preprocessing)
 

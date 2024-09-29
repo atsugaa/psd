@@ -1,3 +1,11 @@
+
+Fitur yang ingin diprediksi adalah Close karena dengan mengetahui harga close di esok hari maka bisa menjadi sinyal untuk membeli saham jika harga prediksi close lebih besar dari harga close hari ini dan sebaliknya, maka perlu dilakukan seleksi fitur.
+
+```{code-cell}
+train_df = df.filter(['Close'])
+train_df
+```
+
 # Markdown Files
 
 Whether you write your book's content in Jupyter Notebooks (`.ipynb`) or
