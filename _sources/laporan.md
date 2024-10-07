@@ -102,7 +102,70 @@ for i, col in enumerate(features):
 plt.show()
 ```
 
-Terlihat hanya kolom Volume yang memiliki outlier. Maka dibutuhkan penanganan terhadap outlier di kolom Volume
+Terlihat hanya kolom Volume yang memiliki outlier. Maka dibutuhkan penanganan terhadap outlier di kolom Volume, Metode Z-score digunakan untuk mendeteksi outlier dalam dataset dengan menghitung Z-score untuk setiap nilai. Z-score mengukur seberapa jauh nilai berada dari rata-rata standar deviasi. Namun sebelum menghitung rumus Z-Score terdapat beberapa nilai yang dibutuhkan yaitu :
+
+1. Simple Moving Average
+
+$$
+\text{SMA} = \frac{1}{n} \sum_{i=0}^{n-1} y[i]
+$$
+
+Keterangan :
+  - $\text{SMA}$: simple moving average.
+  - $n$: Ukuran window.
+  - $y[i]$: Nilai pada indeks $i$ dalam dataset $y$.
+
+2. Standard Deviation
+
+$$
+\text{Standard Deviation} = \sqrt{\frac{1}{n} \sum_{i=0}^{n-1} (y[i] - \text{SMA})^2}
+$$
+
+Keterangan :
+  - $\text{Standard Deviation}$: Standard deviation.
+  - $y[i]$: Nilai pada indeks $i$ dalam dataset $y$.
+  - $\text{SMA}$: Simple Moving average.
+
+3. Z-Score
+
+$$
+Z_t = \frac{y_t - \text{SMA}}{\text{Standard Deviation}}
+$$
+
+Keterangan :
+  - $Z_t$: Z-score untuk nilai pada waktu $t$.
+  - $y_t$: Nilai pada waktu $t$.
+  - $\text{rolling}$: Simple moving average.
+  - $\text{Standard Deviation}$: Standard deviation.
+
+4. Indikator outlier
+
+$$
+m_t = \begin{cases} 
+1 & \text{if } -\text{threshold} \leq Z_t \leq \text{threshold} \\
+0 & \text{otherwise}
+\end{cases}
+$$
+
+Keterangan :
+  - $m_t$: Outlier indicator (1 jika bukan outlier, 0 jika outlier).
+  - $\text{threshold}$: Ambang batas untuk mendeteksi outlier.
+
+5. Penggantian nilai outlier
+
+$$
+\text{Output}_t = \begin{cases} 
+y_t & \text{if } m_t = 1 \\
+\text{SMA} & \text{if } m_t = 0
+\end{cases}
+$$
+
+Keterangan :
+  - $\text{Output}_t$: Nilai output pada waktu $t$.
+  - $y_t$: Nilai asli pada waktu $t$.
+  - $\text{SMA}$: Simple moving average dari data.
+
+Dengan kode python sebagai berikut
 
 ```{code-cell}
 def zscore(s, window, thresh=0, return_all=False):
@@ -197,7 +260,20 @@ input_df = new_df[FEATURES]
 target_df = new_df['Close']
 ```
 
-Melakukan scaling menggunakan Min-Max Scaling yaitu mengubah data sehingga semua nilai berada dalam rentang [0, 1] yang berguna untuk meningkatkan kinerja LSTM.
+Melakukan scaling menggunakan Min-Max Scaling yaitu mengubah data sehingga semua nilai berada dalam rentang [0, 1] dengan rumus berikut
+
+$$
+x' = \frac{x - \text{min}(X)}{\text{max}(X) - \text{min}(X)}
+$$
+
+Di mana:
+
+- $x'$ adalah nilai yang dinormalisasi.
+- $x$ adalah nilai asli dari fitur.
+- $\text{min}(X)$ adalah nilai minimum dari fitur dalam dataset.
+- $\text{max}(X)$ adalah nilai maksimum dari fitur dalam dataset.
+
+Min-Max Scaling berguna untuk meningkatkan kinerja LSTM.
 
 ```{code-cell}
 from sklearn.preprocessing import RobustScaler, MinMaxScaler

@@ -58,6 +58,8 @@
     <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'laporan';</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -749,7 +751,79 @@ memory usage: 58.0+ KB
 <img alt="_images/0fe263388a5392f7cdba232be287d22f107f86514ed8bb7407fd3b5a7fcf2101.png" src="_images/0fe263388a5392f7cdba232be287d22f107f86514ed8bb7407fd3b5a7fcf2101.png" />
 </div>
 </div>
-<p>Terlihat hanya kolom Volume yang memiliki outlier. Maka dibutuhkan penanganan terhadap outlier di kolom Volume</p>
+<p>Terlihat hanya kolom Volume yang memiliki outlier. Maka dibutuhkan penanganan terhadap outlier di kolom Volume, Metode Z-score digunakan untuk mendeteksi outlier dalam dataset dengan menghitung Z-score untuk setiap nilai. Z-score mengukur seberapa jauh nilai berada dari rata-rata standar deviasi. Namun sebelum menghitung rumus Z-Score terdapat beberapa nilai yang dibutuhkan yaitu :</p>
+<ol class="arabic simple">
+<li><p>Simple Moving Average</p></li>
+</ol>
+<div class="math notranslate nohighlight">
+\[
+\text{SMA} = \frac{1}{n} \sum_{i=0}^{n-1} y[i]
+\]</div>
+<p>Keterangan :</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(\text{SMA}\)</span>: simple moving average.</p></li>
+<li><p><span class="math notranslate nohighlight">\(n\)</span>: Ukuran window.</p></li>
+<li><p><span class="math notranslate nohighlight">\(y[i]\)</span>: Nilai pada indeks <span class="math notranslate nohighlight">\(i\)</span> dalam dataset <span class="math notranslate nohighlight">\(y\)</span>.</p></li>
+</ul>
+<ol class="arabic simple" start="2">
+<li><p>Standard Deviation</p></li>
+</ol>
+<div class="math notranslate nohighlight">
+\[
+\text{Standard Deviation} = \sqrt{\frac{1}{n} \sum_{i=0}^{n-1} (y[i] - \text{SMA})^2}
+\]</div>
+<p>Keterangan :</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(\text{Standard Deviation}\)</span>: Standard deviation.</p></li>
+<li><p><span class="math notranslate nohighlight">\(y[i]\)</span>: Nilai pada indeks <span class="math notranslate nohighlight">\(i\)</span> dalam dataset <span class="math notranslate nohighlight">\(y\)</span>.</p></li>
+<li><p><span class="math notranslate nohighlight">\(\text{SMA}\)</span>: Simple Moving average.</p></li>
+</ul>
+<ol class="arabic simple" start="3">
+<li><p>Z-Score</p></li>
+</ol>
+<div class="math notranslate nohighlight">
+\[
+Z_t = \frac{y_t - \text{SMA}}{\text{Standard Deviation}}
+\]</div>
+<p>Keterangan :</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(Z_t\)</span>: Z-score untuk nilai pada waktu <span class="math notranslate nohighlight">\(t\)</span>.</p></li>
+<li><p><span class="math notranslate nohighlight">\(y_t\)</span>: Nilai pada waktu <span class="math notranslate nohighlight">\(t\)</span>.</p></li>
+<li><p><span class="math notranslate nohighlight">\(\text{rolling}\)</span>: Simple moving average.</p></li>
+<li><p><span class="math notranslate nohighlight">\(\text{Standard Deviation}\)</span>: Standard deviation.</p></li>
+</ul>
+<ol class="arabic simple" start="4">
+<li><p>Indikator outlier</p></li>
+</ol>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+m_t = \begin{cases} 
+1 &amp; \text{if } -\text{threshold} \leq Z_t \leq \text{threshold} \\
+0 &amp; \text{otherwise}
+\end{cases}
+\end{split}\]</div>
+<p>Keterangan :</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(m_t\)</span>: Outlier indicator (1 jika bukan outlier, 0 jika outlier).</p></li>
+<li><p><span class="math notranslate nohighlight">\(\text{threshold}\)</span>: Ambang batas untuk mendeteksi outlier.</p></li>
+</ul>
+<ol class="arabic simple" start="5">
+<li><p>Penggantian nilai outlier</p></li>
+</ol>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\text{Output}_t = \begin{cases} 
+y_t &amp; \text{if } m_t = 1 \\
+\text{SMA} &amp; \text{if } m_t = 0
+\end{cases}
+\end{split}\]</div>
+<p>Keterangan :</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(\text{Output}_t\)</span>: Nilai output pada waktu <span class="math notranslate nohighlight">\(t\)</span>.</p></li>
+<li><p><span class="math notranslate nohighlight">\(y_t\)</span>: Nilai asli pada waktu <span class="math notranslate nohighlight">\(t\)</span>.</p></li>
+<li><p><span class="math notranslate nohighlight">\(\text{SMA}\)</span>: Simple moving average dari data.</p></li>
+</ul>
+<p>Dengan kode python sebagai berikut</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">zscore</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">window</span><span class="p">,</span> <span class="n">thresh</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">return_all</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
@@ -777,7 +851,7 @@ memory usage: 58.0+ KB
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x146d893ae10&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x24304977890&gt;
 </pre></div>
 </div>
 <img alt="_images/0f84cee5d11d9c412a181dc29fc22fa2e42755ac2620c7b6f0c490373a46e4ea.png" src="_images/0f84cee5d11d9c412a181dc29fc22fa2e42755ac2620c7b6f0c490373a46e4ea.png" />
@@ -879,7 +953,19 @@ memory usage: 58.0+ KB
 </div>
 </div>
 </div>
-<p>Melakukan scaling menggunakan Min-Max Scaling yaitu mengubah data sehingga semua nilai berada dalam rentang [0, 1] yang berguna untuk meningkatkan kinerja LSTM.</p>
+<p>Melakukan scaling menggunakan Min-Max Scaling yaitu mengubah data sehingga semua nilai berada dalam rentang [0, 1] dengan rumus berikut</p>
+<div class="math notranslate nohighlight">
+\[
+x' = \frac{x - \text{min}(X)}{\text{max}(X) - \text{min}(X)}
+\]</div>
+<p>Di mana:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(x'\)</span> adalah nilai yang dinormalisasi.</p></li>
+<li><p><span class="math notranslate nohighlight">\(x\)</span> adalah nilai asli dari fitur.</p></li>
+<li><p><span class="math notranslate nohighlight">\(\text{min}(X)\)</span> adalah nilai minimum dari fitur dalam dataset.</p></li>
+<li><p><span class="math notranslate nohighlight">\(\text{max}(X)\)</span> adalah nilai maksimum dari fitur dalam dataset.</p></li>
+</ul>
+<p>Min-Max Scaling berguna untuk meningkatkan kinerja LSTM.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.preprocessing</span> <span class="kn">import</span> <span class="n">RobustScaler</span><span class="p">,</span> <span class="n">MinMaxScaler</span>
