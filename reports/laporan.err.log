@@ -18,69 +18,61 @@ Traceback (most recent call last):
     raise CellExecutionError.from_cell_and_msg(cell, exec_reply_content)
 nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
 ------------------
-df_temp = zscore(df['Volume'], window=50)
-plt.subplots(figsize=(20,10))
-plt.subplot(1,2,1)
-sb.boxplot(df['Volume'])
-plt.subplot(1,2,2)
-sb.boxplot(df_temp['Volume'])
-plt.show()
+import math
+
+# Prediction Index
+index_Close = new_df.columns.get_loc("Close")
+
+train_data_len = math.ceil(np_data_scaled.shape[0] * 0.8)
+
+# Create the training and test data
+train_data = np_data_scaled[0:train_data_len, :]
+test_data = np_data_scaled[train_data_len - sequence_length:, :]
+
+# The RNN needs data with the format of [samples, time steps, features]
+# Here, we create N samples, sequence_length time steps per sample, and 6 features
+def partition_dataset(sequence_length, data):
+    x, y = [], []
+    data_len = data.shape[0]
+    for i in range(sequence_length, data_len):
+        x.append(data[i-sequence_length:i,FEATURES]) #contains sequence_length values 0-sequence_length * columsn
+        y.append(data[i, index_Close]) #contains the prediction values for validation,  for single-step prediction
+    
+    # Convert the x and y to numpy arrays
+    x = np.array(x)
+    y = np.array(y)
+    return x, y
+
+# Generate training data and test data
+x_train, y_train = partition_dataset(sequence_length, train_data)
+x_test, y_test = partition_dataset(sequence_length, test_data)
+
+# Print the shapes: the result is: (rows, training_sequence, features) (prediction value, )
+print(x_train.shape, y_train.shape)
+print(x_test.shape, y_test.shape)
+
+# Validate that the prediction value and the input match up
+# The last close price of the second input sample should equal the first prediction value
+print(x_train[1][sequence_length-1][index_Close])
+print(y_train[0])
 ------------------
 
 
 [1;31m---------------------------------------------------------------------------[0m
-[1;31mDateParseError[0m                            Traceback (most recent call last)
-File [1;32m~\AppData\Local\Programs\Python\Python312\Lib\site-packages\pandas\core\indexes\datetimes.py:603[0m, in [0;36mDatetimeIndex.get_loc[1;34m(self, key)[0m
-[0;32m    602[0m [38;5;28;01mtry[39;00m:
-[1;32m--> 603[0m     parsed, reso [38;5;241m=[39m [38;5;28;43mself[39;49m[38;5;241;43m.[39;49m[43m_parse_with_reso[49m[43m([49m[43mkey[49m[43m)[49m
-[0;32m    604[0m [38;5;28;01mexcept[39;00m ([38;5;167;01mValueError[39;00m, pytz[38;5;241m.[39mNonExistentTimeError) [38;5;28;01mas[39;00m err:
+[1;31mIndexError[0m                                Traceback (most recent call last)
+Cell [1;32mIn[16], line 27[0m
+[0;32m     24[0m     [38;5;28;01mreturn[39;00m x, y
+[0;32m     26[0m [38;5;66;03m# Generate training data and test data[39;00m
+[1;32m---> 27[0m x_train, y_train [38;5;241m=[39m [43mpartition_dataset[49m[43m([49m[43msequence_length[49m[43m,[49m[43m [49m[43mtrain_data[49m[43m)[49m
+[0;32m     28[0m x_test, y_test [38;5;241m=[39m partition_dataset(sequence_length, test_data)
+[0;32m     30[0m [38;5;66;03m# Print the shapes: the result is: (rows, training_sequence, features) (prediction value, )[39;00m
 
-File [1;32m~\AppData\Local\Programs\Python\Python312\Lib\site-packages\pandas\core\indexes\datetimes.py:559[0m, in [0;36mDatetimeIndex._parse_with_reso[1;34m(self, label)[0m
-[0;32m    558[0m [38;5;28;01mdef[39;00m [38;5;21m_parse_with_reso[39m([38;5;28mself[39m, label: [38;5;28mstr[39m):
-[1;32m--> 559[0m     parsed, reso [38;5;241m=[39m [38;5;28;43msuper[39;49m[43m([49m[43m)[49m[38;5;241;43m.[39;49m[43m_parse_with_reso[49m[43m([49m[43mlabel[49m[43m)[49m
-[0;32m    561[0m     parsed [38;5;241m=[39m Timestamp(parsed)
+Cell [1;32mIn[16], line 18[0m, in [0;36mpartition_dataset[1;34m(sequence_length, data)[0m
+[0;32m     16[0m data_len [38;5;241m=[39m data[38;5;241m.[39mshape[[38;5;241m0[39m]
+[0;32m     17[0m [38;5;28;01mfor[39;00m i [38;5;129;01min[39;00m [38;5;28mrange[39m(sequence_length, data_len):
+[1;32m---> 18[0m     x[38;5;241m.[39mappend([43mdata[49m[43m[[49m[43mi[49m[38;5;241;43m-[39;49m[43msequence_length[49m[43m:[49m[43mi[49m[43m,[49m[43mFEATURES[49m[43m][49m) [38;5;66;03m#contains sequence_length values 0-sequence_length * columsn[39;00m
+[0;32m     19[0m     y[38;5;241m.[39mappend(data[i, index_Close]) [38;5;66;03m#contains the prediction values for validation,  for single-step prediction[39;00m
+[0;32m     21[0m [38;5;66;03m# Convert the x and y to numpy arrays[39;00m
 
-File [1;32m~\AppData\Local\Programs\Python\Python312\Lib\site-packages\pandas\core\indexes\datetimelike.py:293[0m, in [0;36mDatetimeIndexOpsMixin._parse_with_reso[1;34m(self, label)[0m
-[0;32m    291[0m     label [38;5;241m=[39m [38;5;28mstr[39m(label)
-[1;32m--> 293[0m parsed, reso_str [38;5;241m=[39m [43mparsing[49m[38;5;241;43m.[39;49m[43mparse_datetime_string_with_reso[49m[43m([49m[43mlabel[49m[43m,[49m[43m [49m[43mfreqstr[49m[43m)[49m
-[0;32m    294[0m reso [38;5;241m=[39m Resolution[38;5;241m.[39mfrom_attrname(reso_str)
-
-File [1;32mparsing.pyx:442[0m, in [0;36mpandas._libs.tslibs.parsing.parse_datetime_string_with_reso[1;34m()[0m
-
-File [1;32mparsing.pyx:666[0m, in [0;36mpandas._libs.tslibs.parsing.dateutil_parse[1;34m()[0m
-
-[1;31mDateParseError[0m: Unknown datetime string format, unable to parse: Volume
-
-The above exception was the direct cause of the following exception:
-
-[1;31mKeyError[0m                                  Traceback (most recent call last)
-Cell [1;32mIn[8], line 6[0m
-[0;32m      4[0m sb[38;5;241m.[39mboxplot(df[[38;5;124m'[39m[38;5;124mVolume[39m[38;5;124m'[39m])
-[0;32m      5[0m plt[38;5;241m.[39msubplot([38;5;241m1[39m,[38;5;241m2[39m,[38;5;241m2[39m)
-[1;32m----> 6[0m sb[38;5;241m.[39mboxplot([43mdf_temp[49m[43m[[49m[38;5;124;43m'[39;49m[38;5;124;43mVolume[39;49m[38;5;124;43m'[39;49m[43m][49m)
-[0;32m      7[0m plt[38;5;241m.[39mshow()
-
-File [1;32m~\AppData\Local\Programs\Python\Python312\Lib\site-packages\pandas\core\series.py:1121[0m, in [0;36mSeries.__getitem__[1;34m(self, key)[0m
-[0;32m   1118[0m     [38;5;28;01mreturn[39;00m [38;5;28mself[39m[38;5;241m.[39m_values[key]
-[0;32m   1120[0m [38;5;28;01melif[39;00m key_is_scalar:
-[1;32m-> 1121[0m     [38;5;28;01mreturn[39;00m [38;5;28;43mself[39;49m[38;5;241;43m.[39;49m[43m_get_value[49m[43m([49m[43mkey[49m[43m)[49m
-[0;32m   1123[0m [38;5;66;03m# Convert generator to list before going through hashable part[39;00m
-[0;32m   1124[0m [38;5;66;03m# (We will iterate through the generator there to check for slices)[39;00m
-[0;32m   1125[0m [38;5;28;01mif[39;00m is_iterator(key):
-
-File [1;32m~\AppData\Local\Programs\Python\Python312\Lib\site-packages\pandas\core\series.py:1237[0m, in [0;36mSeries._get_value[1;34m(self, label, takeable)[0m
-[0;32m   1234[0m     [38;5;28;01mreturn[39;00m [38;5;28mself[39m[38;5;241m.[39m_values[label]
-[0;32m   1236[0m [38;5;66;03m# Similar to Index.get_value, but we do not fall back to positional[39;00m
-[1;32m-> 1237[0m loc [38;5;241m=[39m [38;5;28;43mself[39;49m[38;5;241;43m.[39;49m[43mindex[49m[38;5;241;43m.[39;49m[43mget_loc[49m[43m([49m[43mlabel[49m[43m)[49m
-[0;32m   1239[0m [38;5;28;01mif[39;00m is_integer(loc):
-[0;32m   1240[0m     [38;5;28;01mreturn[39;00m [38;5;28mself[39m[38;5;241m.[39m_values[loc]
-
-File [1;32m~\AppData\Local\Programs\Python\Python312\Lib\site-packages\pandas\core\indexes\datetimes.py:605[0m, in [0;36mDatetimeIndex.get_loc[1;34m(self, key)[0m
-[0;32m    603[0m     parsed, reso [38;5;241m=[39m [38;5;28mself[39m[38;5;241m.[39m_parse_with_reso(key)
-[0;32m    604[0m [38;5;28;01mexcept[39;00m ([38;5;167;01mValueError[39;00m, pytz[38;5;241m.[39mNonExistentTimeError) [38;5;28;01mas[39;00m err:
-[1;32m--> 605[0m     [38;5;28;01mraise[39;00m [38;5;167;01mKeyError[39;00m(key) [38;5;28;01mfrom[39;00m [38;5;21;01merr[39;00m
-[0;32m    606[0m [38;5;28mself[39m[38;5;241m.[39m_disallow_mismatched_indexing(parsed)
-[0;32m    608[0m [38;5;28;01mif[39;00m [38;5;28mself[39m[38;5;241m.[39m_can_partial_date_slice(reso):
-
-[1;31mKeyError[0m: 'Volume'
+[1;31mIndexError[0m: only integers, slices (`:`), ellipsis (`...`), numpy.newaxis (`None`) and integer or boolean arrays are valid indices
 

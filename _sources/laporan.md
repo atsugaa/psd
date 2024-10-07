@@ -174,13 +174,97 @@ Dapat disimpulkan bahwa data yang digunakan terbilang bagus dan cocok untuk dipa
 
 ### Pra-pemrosesan Data (Data Preprocessing)
 
-#### Memilih Data
+Menggunakan kolom Open, High, Low, Close-1, Volume sebagai fitur input dan fitur target/output yaitu kolom Close. Kolom Volume menggunakan data yang sudah ditangani outliernya.
 
-Sebelum data digunakan, data akan dipilih terlebih dahulu bagian mana saja yang akan digunakan nantinya serta alasan alasan mengapa bagian tersebut digunakan atau mengapa bagian tersebut tidak digunakan.
+```{code-cell}
+new_df = df.sort_values(by=['Date']).copy()
+new_df['Volume'] = df_temp
+```
 
-#### Membersihkan Data
+Menambahkan fitur Close-1 ke dataframe
 
-Pada tahap ini dilakukan pembersihan data sebelum digunakan seperti melakukan penghapusan data maupun baris / kolom yang tidak relevan atau tidak akurat. Pada data cleaning juga menghapus data duplikat untuk menghindari pengaruh analisis yang tidak sesuai.
+```{code-cell}
+new_df['Close-1'] = new_df['Close'].shift(1)
+new_df = new_df.dropna()
+FEATURES = ['High', 'Low', 'Open', 'Close-1', 'Volume']
+```
+
+Memisahkan dataframe menjadi input dan output
+
+```{code-cell}
+input_df = new_df[FEATURES]
+
+target_df = new_df['Close']
+```
+
+Melakukan scaling menggunakan Min-Max Scaling yaitu mengubah data sehingga semua nilai berada dalam rentang [0, 1] yang berguna untuk meningkatkan kinerja LSTM.
+
+```{code-cell}
+from sklearn.preprocessing import RobustScaler, MinMaxScaler
+
+# Convert the data to numpy values
+np_data_unscaled = np.array(input_df)
+
+# Transform the data by scaling each feature to a range between 0 and 1
+scaler = MinMaxScaler()
+np_data_scaled = scaler.fit_transform(np_data_unscaled)
+
+# Creating a separate scaler that works on a single column for scaling predictions
+scaler_pred = MinMaxScaler()
+df_Close = pd.DataFrame(target_df)
+np_Close_scaled = scaler_pred.fit_transform(df_Close)
+```
+
+Selanjutnya mempersiapkan data sebelum masuk ke pemodelan.
+
+```{code-cell}
+sequence_length = 50
+```
+Yang berarti model akan melihat 50 hari sebelumnya untuk memprediksi harga di hari berikutnya. Selanjutnya membagi data untuk data train sebesar 80% dan data test sebesar 20% 
+
+```{code-cell}
+import math
+
+# Prediction Index
+index_Close = new_df.columns.get_loc("Close")
+
+train_data_len = math.ceil(np_data_scaled.shape[0] * 0.8)
+
+# Create the training and test data
+train_data = np_data_scaled[0:train_data_len, :]
+test_data = np_data_scaled[train_data_len - sequence_length:, :]
+
+```
+
+Mempartisi data menjadi input (x) dan target (y).
+
+```{code-cell}
+def partition_dataset(sequence_length, data):
+    x, y = [], []
+    data_len = data.shape[0]
+    for i in range(sequence_length, data_len):
+        x.append(data[i-sequence_length:i,:]) #contains sequence_length values 0-sequence_length * columsn
+        y.append(data[i, index_Close]) #contains the prediction values for validation,  for single-step prediction
+    
+    # Convert the x and y to numpy arrays
+    x = np.array(x)
+    y = np.array(y)
+    return x, y
+
+# Generate training data and test data
+x_train, y_train = partition_dataset(sequence_length, train_data)
+x_test, y_test = partition_dataset(sequence_length, test_data)
+
+# Print the shapes: the result is: (rows, training_sequence, features) (prediction value, )
+print(x_train.shape, y_train.shape)
+print(x_test.shape, y_test.shape)
+
+# Validate that the prediction value and the input match up
+# The last close price of the second input sample should equal the first prediction value
+print(x_train[1][sequence_length-1][index_Close])
+print(y_train[0])
+```
+
 
 ### Pemodelan Data (Data Modelling)
 
