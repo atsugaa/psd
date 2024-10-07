@@ -265,6 +265,7 @@ print(x_train[1][sequence_length-1][index_Close])
 print(y_train[0])
 ```
 
+Dengan begitu data sudah siap digunakan modelling.
 
 ### Pemodelan Data (Data Modelling)
 
