@@ -13,7 +13,7 @@ kernelspec:
 ---
 
 
-# Laporan Proyek Sains Data 1
+# Laporan Proyek Sains Data 2
 
 ## Pendahuluan
 
@@ -45,7 +45,6 @@ Proyek ini menggunakan data time series dari data historis perdagangan saham har
 import pandas as pd
 
 # Load data
-stockname = "ADARO"
 df = pd.read_csv('https://raw.githubusercontent.com/atsugaa/psd/refs/heads/main/ADRO.csv')
 pd.options.display.float_format = '{:.0f}'.format
 df.head()
@@ -208,6 +207,7 @@ Selanjutnya melihat data trend di masing-masing kolom
 
 
 ```{code-cell}
+#Data Trend
 for i in df:
   df[i].plot(kind='line', figsize=(8, 4), title=i)
   plt.show()
@@ -244,11 +244,17 @@ new_df = df.sort_values(by=['Date']).copy()
 new_df['Volume'] = df_temp
 ```
 
+Menambahkan fitur Close-1 ke dataframe
+
+```{code-cell}
+new_df['Close-1'] = new_df['Close'].shift(1)
+new_df = new_df.dropna()
+FEATURES = ['High', 'Low', 'Open', 'Close-1', 'Volume']
+```
+
 Memisahkan dataframe menjadi input dan output
 
 ```{code-cell}
-new_df = new_df.dropna()
-FEATURES = ['High', 'Low', 'Open', 'Close', 'Volume']
 input_df = new_df[FEATURES]
 
 target_df = new_df['Close']
@@ -341,38 +347,11 @@ Dengan begitu data sudah siap digunakan modelling.
 
 #### Memilih Model
 
-Menggunakan model LSTM (Long-Short Term Memory) karena diharapkan mampu menangkap pola dalam data time-series, termasuk tren jangka panjang dan fluktuasi harian, sehingga dapat meminimalkan nilai error prediksi yang dihasilkan.
+Memilih model yang paling cocok sesuai dengan topik yang dibawa.
 
 #### Membangun Model
 
-Moenggunakan model Sequential yang terdiri dari lapisan Long Short-Term Memory (LSTM) dengan 200 unit untuk menangkap pola temporal, lapisan Dropout 40% untuk mencegah overfitting, lapisan Dense dengan 100 unit dan aktivasi ReLU untuk hubungan non-linear, serta lapisan Dense dengan 1 unit untuk menghasilkan nilai prediksi.
-
-Menggunakan optimasi Adam serta Callback ModelCheckpoint digunakan untuk menyimpan model pada setiap epoch, sementara EarlyStopping menghentikan pelatihan jika validasi loss tidak membaik selama 5 epoch. Dengan maksimum 30 epoch dan batch size 8, model dilatih menggunakan data validasi untuk memantau performa. Kombinasi elemen ini memastikan model optimal dan tahan terhadap overfitting.
-
-```{code-cell}
-from tensorflow.keras import Sequential # Deep learning library, used for neural networks
-from tensorflow.keras.layers import LSTM, Dense, Dropout # Deep learning classes for recurrent and regular densely-connected layers
-from tensorflow.keras.callbacks import ModelCheckpoint
-from tensorflow.keras.callbacks import EarlyStopping # EarlyStopping during model training
-from sklearn.preprocessing import RobustScaler, MinMaxScaler # This Scaler removes the median and scales the data according to the quantile range to normalize the price data
-
-
-model = Sequential()
-model.add(LSTM(200, input_shape=(x_train.shape[1], x_train.shape[2])))  # Satu LSTM layer dengan 200 unit
-model.add(Dropout(0.4))  # Dropout untuk mengurangi overfitting
-model.add(Dense(100, activation='relu'))  # Dense layer dengan aktivasi ReLU
-model.add(Dense(1))  # Layer output untuk prediksi harga
-
-# Compile the model
-model.compile(optimizer='adam', loss='mean_squared_error', metrics=['mean_squared_error'])
-# Menyimpan model pada epoch tertentu
-checkpoint = ModelCheckpoint('model_epoch_{epoch:02d}.keras', save_best_only=False, save_weights_only=False, monitor='val_loss', mode='min')
-# Menggunakan ModelCheckpoint bersama dengan EarlyStopping
-early_stopping = EarlyStopping(monitor='val_loss', patience=5)
-
-# Melatih model dan menyimpan riwayat pelatihan
-history = model.fit(x_train, y_train, epochs=30, batch_size=8, validation_data=(x_test, y_test), callbacks=[checkpoint])
-```
+Membangun model yang sudah ditentukan tekniknya sebelumnya
 
 #### Menilai Model
 
@@ -380,114 +359,16 @@ Mengevaluasi model yang telah dibuat, menjelaskan kekurangan model, dan hal hal 
 
 ### Evaluasi
 
-
-```{code-cell}
-train_loss = history.history['loss']
-val_loss = history.history['val_loss']
-epochs = range(1, len(train_loss) + 1)
-
-
-# Membuat grafik
-plt.figure(figsize=(10, 6))
-plt.plot(epochs, train_loss, label='Train Loss', marker='o', color='blue')
-plt.plot(epochs, val_loss, label='Validation Loss', marker='o', color='orange')
-plt.title('Train Loss vs Validation Loss')
-plt.xlabel('Epochs')
-plt.ylabel('Loss')
-plt.legend()
-plt.grid()
-plt.show()
-```
-
-Terlihat bahwa validation loss tiap epoch naik turun dan tidak ada penurunan yang signifikan sehingga memicu earlystopping dan menghentikan training pada epoch tertentu. Sehingga dipilihlah model terbaik dengan nilai error yang minimal.
-
-```{code-cell}
-from tensorflow.keras.models import load_model
-
-model = load_model('model_epoch_11.keras')
-
-
-# Get the predicted values
-y_pred_scaled = model.predict(x_test)
-
-# Unscale the predicted values
-y_pred = scaler_pred.inverse_transform(y_pred_scaled)
-y_test_unscaled = scaler_pred.inverse_transform(y_test.reshape(-1, 1))
-
-# Mean Absolute Error (MAE)
-MAE = mean_absolute_error(y_test_unscaled, y_pred)
-print(f'Median Absolute Error (MAE): {np.round(MAE, 2)}')
-
-# Mean Absolute Percentage Error (MAPE)
-MAPE = np.mean((np.abs(np.subtract(y_test_unscaled, y_pred)/ y_test_unscaled))) * 100
-print(f'Mean Absolute Percentage Error (MAPE): {np.round(MAPE, 2)} %')
-
-# Median Absolute Percentage Error (MDAPE)
-MDAPE = np.median((np.abs(np.subtract(y_test_unscaled, y_pred)/ y_test_unscaled)) ) * 100
-print(f'Median Absolute Percentage Error (MDAPE): {np.round(MDAPE, 2)} %')
-```
-
-Perbandingan data asli dengan data prediksi
-
-
-```{code-cell}
-display_start_date = "2019-01-01" 
-
-# Add the difference between the valid and predicted prices
-train = pd.DataFrame(target_df[:train_data_len + 1]).rename(columns={'Close': 'y_train'})
-valid = pd.DataFrame(target_df[train_data_len:]).rename(columns={'Close': 'y_test'})
-valid.insert(1, "y_pred", y_pred, True)
-valid.insert(1, "residuals", valid["y_pred"] - valid["y_test"], True)
-df_union = pd.concat([train, valid])
-
-# Zoom in to a closer timeframe
-df_union_zoom = df_union[df_union.index > display_start_date]
-
-# Create the lineplot
-fig, ax1 = plt.subplots(figsize=(16, 8))
-plt.title("y_pred vs y_test")
-plt.ylabel(stockname, fontsize=18)
-sns.set_palette(["#090364", "#1960EF", "#EF5919"])
-sns.lineplot(data=df_union_zoom[['y_pred', 'y_train', 'y_test']], linewidth=1.0, dashes=False, ax=ax1)
-
-# Create the bar plot with the differences
-df_sub = ["#2BC97A" if x > 0 else "#C92B2B" for x in df_union_zoom["residuals"].dropna()]
-ax1.bar(height=df_union_zoom['residuals'].dropna(), x=df_union_zoom['residuals'].dropna().index, width=3, label='residuals', color=df_sub)
-plt.legend()
-plt.show()
-```
-
-Uji coba prediksi dengan model yang telah dipilih
-
-
-```{code-cell}
-df_temp = df[-sequence_length:]
-new_df = df_temp.filter(FEATURES)
-
-N = sequence_length
-
-# Get the last N day closing price values and scale the data to be values between 0 and 1
-last_N_days = input_df[-sequence_length:].values
-#print(last_N_days)
-last_N_days_scaled = scaler.transform(last_N_days)
-
-# Create an empty list and Append past N days
-X_test_new = []
-X_test_new.append(last_N_days_scaled)
-
-# Convert the X_test data set to a numpy array and reshape the data
-pred_price_scaled = model.predict(np.array(X_test_new))
-pred_price_unscaled = scaler_pred.inverse_transform(pred_price_scaled.reshape(-1, 1))
-
-# Print last price and predicted price for the next day
-price_today = np.round(new_df['Close'][-1], 2)
-predicted_price = np.round(pred_price_unscaled.ravel()[0], 2)
-change_percent = np.round(100 - (price_today * 100)/predicted_price, 2)
-
-plus = '+'; minus = ''
-print(f'The predicted close price is {predicted_price} ({plus if change_percent > 0 else minus}{change_percent}%)')
-```
+Evaluasi akhir yang menjelaskan nilai akhir dari proyek, menjelaskan hasil, kesalahan yang mungkin telah dilakukan saat proses, serta kekurangan dari proyek.
 
 ### Deployment
 
-Project dideploy ke situs huggingface
+Bagian ini merupakan langkah terakhir di mana model yang sudah dievaluasi dan dianggap cukup baik diimplementasikan seperti aplikasi web, aplikasi mobile dan lain-lain. Deployment dilakukan setelah hasil model dianalisis dan dianggap layak untuk digunakan.
+
+## Penutup
+
+Berisikan ucapan penutup dari laporan proyek sains data.
+
+## Daftar Rujukan
+
+Berisikan rujukan rujukan yang membantu saat melakukan proyek sains data.
