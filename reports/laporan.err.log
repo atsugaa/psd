@@ -37,8 +37,8 @@ nbclient.exceptions.CellTimeoutError: A cell timed out while it was being execut
 The message was: Cell execution timed out.
 Here is a preview of the cell contents:
 -------------------
-['from tensorflow.keras import Sequential # Deep learning library, used for neural networks', 'from tensorflow.keras.layers import LSTM, Dense, Dropout # Deep learning classes for recurrent and regular densely-connected layers', 'from tensorflow.keras.callbacks import ModelCheckpoint', 'from tensorflow.keras.callbacks import EarlyStopping # EarlyStopping during model training', 'from sklearn.preprocessing import RobustScaler, MinMaxScaler # This Scaler removes the median and scales the data according to the quantile range to normalize the price data']
+['model = Sequential()', 'model.add(LSTM(200, input_shape=(x_train.shape[1], x_train.shape[2])))  # Satu LSTM layer dengan 200 unit', 'model.add(Dropout(0.4))  # Dropout untuk mengurangi overfitting', "model.add(Dense(100, activation='relu'))  # Dense layer dengan aktivasi ReLU", 'model.add(Dense(1))  # Layer output untuk prediksi harga']
 ...
-['# Menggunakan ModelCheckpoint bersama dengan EarlyStopping', "early_stopping = EarlyStopping(monitor='val_loss', patience=5)", '', '# Melatih model dan menyimpan riwayat pelatihan', 'history = model.fit(x_train, y_train, epochs=30, batch_size=8, validation_data=(x_test, y_test), callbacks=[checkpoint])']
+['# Menggunakan ModelCheckpoint bersama dengan EarlyStopping', "early_stopping = EarlyStopping(monitor='val_loss', patience=5)", '', '# Melatih model dan menyimpan riwayat pelatihan', 'history = model.fit(x_train, y_train, epochs=30, batch_size=8, validation_data=(x_test, y_test), callbacks=[checkpoint, early_stopping])']
 -------------------
 
