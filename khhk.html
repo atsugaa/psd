@@ -1,0 +1,1218 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="./" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Laporan Proyek Sains Data 3 &#8212; Proyek Sains Data</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=a3416100" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="_static/myfile.css?v=bb5f16dc" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'khhk';</script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="_static/logo.png" class="logo__image only-light" alt="Proyek Sains Data - Home"/>
+    <script>document.write(`<img src="_static/logo.png" class="logo__image only-dark" alt="Proyek Sains Data - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="intro.html">
+                    Selamat Datang
+                </a>
+            </li>
+        </ul>
+        <ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="laporan.html">Laporan Proyek Sains Data 1</a></li>
+<li class="toctree-l1"><a class="reference internal" href="laporan1.html">Laporan 2</a></li>
+<li class="toctree-l1"><a class="reference internal" href="laporan2.html">Laporan 3</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/khhk.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Laporan Proyek Sains Data 3</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pendahuluan">Pendahuluan</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#latar-belakang">Latar Belakang</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#masalah">Masalah</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tujuan">Tujuan</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#metodologi">Metodologi</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#memahami-data-data-understanding">Memahami Data (Data Understanding)</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#pengumpulan-data">Pengumpulan Data</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#deskripsi-data">Deskripsi Data</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#eksplorasi-data">Eksplorasi Data</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#verifikasi-kualitas-data">Verifikasi Kualitas Data</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pra-pemrosesan-data-data-preprocessing">Pra-pemrosesan Data (Data Preprocessing)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pemodelan-data-data-modelling">Pemodelan Data (Data Modelling)</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#memilih-model">Memilih Model</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#membangun-model">Membangun Model</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#menilai-model">Menilai Model</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#evaluasi">Evaluasi</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#deployment">Deployment</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#penutup">Penutup</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#daftar-rujukan">Daftar Rujukan</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="laporan-proyek-sains-data-3">
+<h1>Laporan Proyek Sains Data 3<a class="headerlink" href="#laporan-proyek-sains-data-3" title="Link to this heading">#</a></h1>
+<section id="pendahuluan">
+<h2>Pendahuluan<a class="headerlink" href="#pendahuluan" title="Link to this heading">#</a></h2>
+<section id="latar-belakang">
+<h3>Latar Belakang<a class="headerlink" href="#latar-belakang" title="Link to this heading">#</a></h3>
+<p>Adaro minerals Indonesia merupakan perusahaan pertambangan indonesia yang memiliki visi menjadi perusahaan pertambangan indonesia yang terkemuka. Perusahaan ini memiliki salah satu misi yaitu memaksimalkan nilai bagi pemegang saham. Untuk dapat mencapai visi misi perusahaan diperlukan untuk mengetahui harga saham perusahaan kedepannya.</p>
+<p>Saham adalah surat berharga yang menunjukkan kepemilikan seseorang dalam suatu perusahaan. Tujuan perusahaan menerbitkan saham adalah untuk mendapatkan dana dari pihak yang ingin menanamkan modal untuk mendapatkan keuntungan di masa depan, dana tersebut dapat digunakan untuk mengembangkan bisnis di perusahaan. Saham bersifat fluktuatif, bisa naik bisa turun sama halnya dengan harga barang atau komoditi di pasar. Bagi beberapa orang disanalah seninya, bila pasar statis tidak akan menarik minat investor. Naik turunnya harga saham juga dapat dipengaruhi oleh kinerja perusahaan, semakin baik kinerja perusahaan, maka dapat dipastikan harga saham perusahaan juga naik.</p>
+</section>
+<section id="masalah">
+<h3>Masalah<a class="headerlink" href="#masalah" title="Link to this heading">#</a></h3>
+<p>Adaro minerals indonesia yang memiliki salah satu misi yaitu memaksimalkan nilai bagi pemegang saham. Untuk dapat mencapai misi perusahaan tersebut diperlukan untuk mengetahui harga saham perusahaan kedepannya. Selain itu juga, harga saham yang menurun dalam jangka waktu yang lama dapat membuat investor menjadi hilang kepercayaan kepada perusahaan, hal itu dapat menghambat perkembangan perusahaan. Oleh karena itu muncul ide untuk melakukan peramalan harga saham dimasa mendatang.</p>
+</section>
+<section id="tujuan">
+<h3>Tujuan<a class="headerlink" href="#tujuan" title="Link to this heading">#</a></h3>
+<p>Dengan dilakukannya peramalan harga saham x minerals indonesia, diharapkan dapat menjadi indikator kinerja perusahaan dan perusahaan dapat mengantisipasi jika diramalkan harga saham turun dikemudian hari, dengan begitu kinerja perusahaan dapat selalu baik dan harga saham dapat terjaga. Hal ini dapat mencapai salah satu misi perusahaan yaitu memaksimalkan nilai bagi pemegang saham. Dan akan ada banyak investor yang tertarik untuk berinvestasi pada perusahaan, hal ini dapat membantu pendanaan perusahaan untuk dapat lebih berkembang.</p>
+</section>
+</section>
+<section id="metodologi">
+<h2>Metodologi<a class="headerlink" href="#metodologi" title="Link to this heading">#</a></h2>
+<section id="memahami-data-data-understanding">
+<h3>Memahami Data (Data Understanding)<a class="headerlink" href="#memahami-data-data-understanding" title="Link to this heading">#</a></h3>
+<section id="pengumpulan-data">
+<h4>Pengumpulan Data<a class="headerlink" href="#pengumpulan-data" title="Link to this heading">#</a></h4>
+<p>Proyek ini menggunakan data time series dari data historis perdagangan saham harian perusahaan Adaro (ADARO) selama hari kerja dalam jangka waktu 5 tahun dari 22 Agustus 2019 sampai 20 September 2024 yang didapat dari situs web <a class="reference external" href="https://www.google.com/finance/quote/ADRO:IDX?hl=en&amp;amp;window=5Y">Google Finance</a> yang datanya bersumber langsung dari Bursa Efek Indonesia yang bertanggung jawab dalam menyediakan semua sarana perdagangan efek dan membuat peraturan yang berkaitan dengan kegiatan bursa di Indonesia. Data yang diambil berformat CSV (Comma-separated value) yang berisikan 1234 baris perdagangan saham.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#import library</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+
+<span class="c1"># Load data</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;https://raw.githubusercontent.com/atsugaa/psd/refs/heads/main/ADRO.csv&#39;</span><span class="p">)</span>
+<span class="n">pd</span><span class="o">.</span><span class="n">options</span><span class="o">.</span><span class="n">display</span><span class="o">.</span><span class="n">float_format</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="si">{:.0f}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span>
+<span class="n">df</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Date</th>
+      <th>Open</th>
+      <th>High</th>
+      <th>Low</th>
+      <th>Close</th>
+      <th>Volume</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>22/08/2019 16:00:00</td>
+      <td>1035</td>
+      <td>1040</td>
+      <td>1020</td>
+      <td>1020</td>
+      <td>32651600</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>23/08/2019 16:00:00</td>
+      <td>1055</td>
+      <td>1145</td>
+      <td>1045</td>
+      <td>1085</td>
+      <td>196150500</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>26/08/2019 16:00:00</td>
+      <td>1060</td>
+      <td>1120</td>
+      <td>1050</td>
+      <td>1120</td>
+      <td>82143700</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>27/08/2019 16:00:00</td>
+      <td>1130</td>
+      <td>1155</td>
+      <td>1090</td>
+      <td>1130</td>
+      <td>139043800</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>28/08/2019 16:00:00</td>
+      <td>1130</td>
+      <td>1140</td>
+      <td>1100</td>
+      <td>1105</td>
+      <td>48177500</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+</section>
+<section id="deskripsi-data">
+<h4>Deskripsi Data<a class="headerlink" href="#deskripsi-data" title="Link to this heading">#</a></h4>
+<p>Data saham berupa csv berisikan 1234 baris dan 6 kolom yang merupakan :</p>
+<ul class="simple">
+<li><p>Date : Tanggal perdagangan saham yang berformat yyyy-mm-dd hh:mm:ss</p></li>
+<li><p>Open : Harga saat pasar saham dibuka ditanggal tertentu (pukul 9 pagi)</p></li>
+<li><p>High : Harga tertinggi yang pernah dicapai ditanggal tertentu</p></li>
+<li><p>Low : Harga terendah yang pernah dicapai ditanggal tertentu</p></li>
+<li><p>Close : Harga terakhir saham dalam rupiah saat pasar saham ditutup hari itu (pukul 3 sore)</p></li>
+<li><p>Volume : Besaran transaksi yang terjadi ditanggal tersebut dalam jutaan</p></li>
+</ul>
+<p>Melihat tipe data dari masing masing kolom.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">dtypes</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Date      object
+Open       int64
+High       int64
+Low        int64
+Close      int64
+Volume     int64
+dtype: object
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">describe</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Open</th>
+      <th>High</th>
+      <th>Low</th>
+      <th>Close</th>
+      <th>Volume</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>count</th>
+      <td>1234</td>
+      <td>1234</td>
+      <td>1234</td>
+      <td>1234</td>
+      <td>1234</td>
+    </tr>
+    <tr>
+      <th>mean</th>
+      <td>2167</td>
+      <td>2204</td>
+      <td>2130</td>
+      <td>2165</td>
+      <td>85894189</td>
+    </tr>
+    <tr>
+      <th>std</th>
+      <td>906</td>
+      <td>918</td>
+      <td>896</td>
+      <td>907</td>
+      <td>67661535</td>
+    </tr>
+    <tr>
+      <th>min</th>
+      <td>645</td>
+      <td>670</td>
+      <td>610</td>
+      <td>645</td>
+      <td>12413400</td>
+    </tr>
+    <tr>
+      <th>25%</th>
+      <td>1275</td>
+      <td>1300</td>
+      <td>1250</td>
+      <td>1270</td>
+      <td>41125975</td>
+    </tr>
+    <tr>
+      <th>50%</th>
+      <td>2260</td>
+      <td>2310</td>
+      <td>2215</td>
+      <td>2260</td>
+      <td>67563800</td>
+    </tr>
+    <tr>
+      <th>75%</th>
+      <td>2880</td>
+      <td>2920</td>
+      <td>2840</td>
+      <td>2870</td>
+      <td>105761650</td>
+    </tr>
+    <tr>
+      <th>max</th>
+      <td>4140</td>
+      <td>4250</td>
+      <td>4080</td>
+      <td>4140</td>
+      <td>539995200</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">info</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;class &#39;pandas.core.frame.DataFrame&#39;&gt;
+RangeIndex: 1234 entries, 0 to 1233
+Data columns (total 6 columns):
+ #   Column  Non-Null Count  Dtype 
+---  ------  --------------  ----- 
+ 0   Date    1234 non-null   object
+ 1   Open    1234 non-null   int64 
+ 2   High    1234 non-null   int64 
+ 3   Low     1234 non-null   int64 
+ 4   Close   1234 non-null   int64 
+ 5   Volume  1234 non-null   int64 
+dtypes: int64(5), object(1)
+memory usage: 58.0+ KB
+</pre></div>
+</div>
+</div>
+</div>
+<p>Terbaca bahwa dari 1234 baris data tiap kolomnya tidak ada baris yang kosong (null).</p>
+</section>
+<section id="eksplorasi-data">
+<h4>Eksplorasi Data<a class="headerlink" href="#eksplorasi-data" title="Link to this heading">#</a></h4>
+<p>Sebelum melanjutkan eksplorasi data, terlebih dahulu menghapus jam, menit, dan detik dari kolom tanggal (Date) dan menjadikannya sebagai index dari data agar memudahkan prosesnya, Hasilnya seperti dibawah.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;Date&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;Date&#39;</span><span class="p">],</span> <span class="n">dayfirst</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span><span class="o">.</span><span class="n">dt</span><span class="o">.</span><span class="n">date</span>
+<span class="n">df</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="s1">&#39;Date&#39;</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">df</span><span class="o">.</span><span class="n">index</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">index</span><span class="p">)</span>
+<span class="n">df</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Open</th>
+      <th>High</th>
+      <th>Low</th>
+      <th>Close</th>
+      <th>Volume</th>
+    </tr>
+    <tr>
+      <th>Date</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>2019-08-22</th>
+      <td>1035</td>
+      <td>1040</td>
+      <td>1020</td>
+      <td>1020</td>
+      <td>32651600</td>
+    </tr>
+    <tr>
+      <th>2019-08-23</th>
+      <td>1055</td>
+      <td>1145</td>
+      <td>1045</td>
+      <td>1085</td>
+      <td>196150500</td>
+    </tr>
+    <tr>
+      <th>2019-08-26</th>
+      <td>1060</td>
+      <td>1120</td>
+      <td>1050</td>
+      <td>1120</td>
+      <td>82143700</td>
+    </tr>
+    <tr>
+      <th>2019-08-27</th>
+      <td>1130</td>
+      <td>1155</td>
+      <td>1090</td>
+      <td>1130</td>
+      <td>139043800</td>
+    </tr>
+    <tr>
+      <th>2019-08-28</th>
+      <td>1130</td>
+      <td>1140</td>
+      <td>1100</td>
+      <td>1105</td>
+      <td>48177500</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>Selanjutnya melihat apakah data terdapat outlier</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sb</span>
+<span class="n">features</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Open&#39;</span><span class="p">,</span> <span class="s1">&#39;High&#39;</span><span class="p">,</span> <span class="s1">&#39;Low&#39;</span><span class="p">,</span> <span class="s1">&#39;Close&#39;</span><span class="p">,</span> <span class="s1">&#39;Volume&#39;</span><span class="p">]</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">20</span><span class="p">,</span><span class="mi">10</span><span class="p">))</span>
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">col</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">features</span><span class="p">):</span>
+  <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
+  <span class="n">sb</span><span class="o">.</span><span class="n">boxplot</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="n">col</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/22fff28c00c65fcf767ae5061b77c2bdd983f108363b95bdad123dbe1e99b7b6.png" src="_images/22fff28c00c65fcf767ae5061b77c2bdd983f108363b95bdad123dbe1e99b7b6.png" />
+</div>
+</div>
+<p>Terlihat hanya kolom Volume yang memiliki outlier. Maka dibutuhkan penanganan terhadap outlier di kolom Volume, Metode Z-score digunakan untuk mendeteksi outlier dalam dataset dengan menghitung Z-score untuk setiap nilai. Z-score mengukur seberapa jauh nilai berada dari rata-rata standar deviasi. Namun sebelum menghitung rumus Z-Score terdapat beberapa nilai yang dibutuhkan yaitu :</p>
+<ol class="arabic simple">
+<li><p>Simple Moving Average</p></li>
+</ol>
+<div class="math notranslate nohighlight">
+\[
+\text{SMA} = \frac{1}{n} \sum_{i=0}^{n-1} y[i]
+\]</div>
+<p>Keterangan :</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(\text{SMA}\)</span>: simple moving average.</p></li>
+<li><p><span class="math notranslate nohighlight">\(n\)</span>: Ukuran window.</p></li>
+<li><p><span class="math notranslate nohighlight">\(y[i]\)</span>: Nilai pada indeks <span class="math notranslate nohighlight">\(i\)</span> dalam dataset <span class="math notranslate nohighlight">\(y\)</span>.</p></li>
+</ul>
+<ol class="arabic simple" start="2">
+<li><p>Standard Deviation</p></li>
+</ol>
+<div class="math notranslate nohighlight">
+\[
+\text{Standard Deviation} = \sqrt{\frac{1}{n} \sum_{i=0}^{n-1} (y[i] - \text{SMA})^2}
+\]</div>
+<p>Keterangan :</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(\text{Standard Deviation}\)</span>: Standard deviation.</p></li>
+<li><p><span class="math notranslate nohighlight">\(y[i]\)</span>: Nilai pada indeks <span class="math notranslate nohighlight">\(i\)</span> dalam dataset <span class="math notranslate nohighlight">\(y\)</span>.</p></li>
+<li><p><span class="math notranslate nohighlight">\(\text{SMA}\)</span>: Simple Moving average.</p></li>
+</ul>
+<ol class="arabic simple" start="3">
+<li><p>Z-Score</p></li>
+</ol>
+<div class="math notranslate nohighlight">
+\[
+Z_t = \frac{y_t - \text{SMA}}{\text{Standard Deviation}}
+\]</div>
+<p>Keterangan :</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(Z_t\)</span>: Z-score untuk nilai pada waktu <span class="math notranslate nohighlight">\(t\)</span>.</p></li>
+<li><p><span class="math notranslate nohighlight">\(y_t\)</span>: Nilai pada waktu <span class="math notranslate nohighlight">\(t\)</span>.</p></li>
+<li><p><span class="math notranslate nohighlight">\(\text{rolling}\)</span>: Simple moving average.</p></li>
+<li><p><span class="math notranslate nohighlight">\(\text{Standard Deviation}\)</span>: Standard deviation.</p></li>
+</ul>
+<ol class="arabic simple" start="4">
+<li><p>Indikator outlier</p></li>
+</ol>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+m_t = \begin{cases} 
+1 &amp; \text{if } -\text{threshold} \leq Z_t \leq \text{threshold} \\
+0 &amp; \text{otherwise}
+\end{cases}
+\end{split}\]</div>
+<p>Keterangan :</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(m_t\)</span>: Outlier indicator (1 jika bukan outlier, 0 jika outlier).</p></li>
+<li><p><span class="math notranslate nohighlight">\(\text{threshold}\)</span>: Ambang batas untuk mendeteksi outlier.</p></li>
+</ul>
+<ol class="arabic simple" start="5">
+<li><p>Penggantian nilai outlier</p></li>
+</ol>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\text{Output}_t = \begin{cases} 
+y_t &amp; \text{if } m_t = 1 \\
+\text{SMA} &amp; \text{if } m_t = 0
+\end{cases}
+\end{split}\]</div>
+<p>Keterangan :</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(\text{Output}_t\)</span>: Nilai output pada waktu <span class="math notranslate nohighlight">\(t\)</span>.</p></li>
+<li><p><span class="math notranslate nohighlight">\(y_t\)</span>: Nilai asli pada waktu <span class="math notranslate nohighlight">\(t\)</span>.</p></li>
+<li><p><span class="math notranslate nohighlight">\(\text{SMA}\)</span>: Simple moving average dari data.</p></li>
+</ul>
+<p>Dengan kode python sebagai berikut</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">zscore</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">window</span><span class="p">,</span> <span class="n">thresh</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">return_all</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+    <span class="n">roll</span> <span class="o">=</span> <span class="n">s</span><span class="o">.</span><span class="n">rolling</span><span class="p">(</span><span class="n">window</span><span class="o">=</span><span class="n">window</span><span class="p">,</span> <span class="n">min_periods</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">center</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">avg</span> <span class="o">=</span> <span class="n">roll</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+    <span class="n">std</span> <span class="o">=</span> <span class="n">roll</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">ddof</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+    <span class="n">z</span> <span class="o">=</span> <span class="n">s</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="n">avg</span><span class="p">)</span><span class="o">.</span><span class="n">div</span><span class="p">(</span><span class="n">std</span><span class="p">)</span>   
+    <span class="n">m</span> <span class="o">=</span> <span class="n">z</span><span class="o">.</span><span class="n">between</span><span class="p">(</span><span class="o">-</span><span class="n">thresh</span><span class="p">,</span> <span class="n">thresh</span><span class="p">)</span>
+    
+    <span class="k">if</span> <span class="n">return_all</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">z</span><span class="p">,</span> <span class="n">avg</span><span class="p">,</span> <span class="n">std</span><span class="p">,</span> <span class="n">m</span>
+    <span class="k">return</span> <span class="n">s</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="n">avg</span><span class="p">)</span>
+
+
+<span class="n">z</span><span class="p">,</span> <span class="n">avg</span><span class="p">,</span> <span class="n">std</span><span class="p">,</span> <span class="n">m</span> <span class="o">=</span> <span class="n">zscore</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;Volume&#39;</span><span class="p">],</span> <span class="n">window</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">return_all</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">()</span>
+
+<span class="n">df</span><span class="p">[</span><span class="s1">&#39;Volume&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">label</span><span class="o">=</span><span class="s1">&#39;data&#39;</span><span class="p">)</span>
+<span class="n">avg</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">label</span><span class="o">=</span><span class="s1">&#39;mean&#39;</span><span class="p">)</span>
+<span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="o">~</span><span class="n">m</span><span class="p">,</span> <span class="s1">&#39;Volume&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">label</span><span class="o">=</span><span class="s1">&#39;outliers&#39;</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;o&#39;</span><span class="p">,</span> <span class="n">ls</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
+<span class="n">avg</span><span class="p">[</span><span class="o">~</span><span class="n">m</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">label</span><span class="o">=</span><span class="s1">&#39;replacement&#39;</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;o&#39;</span><span class="p">,</span> <span class="n">ls</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x2014c331b20&gt;
+</pre></div>
+</div>
+<img alt="_images/b1cf77260f0241e6a81a64ed87e619d5ec2c63065ddac5801242c18d356bb69f.png" src="_images/b1cf77260f0241e6a81a64ed87e619d5ec2c63065ddac5801242c18d356bb69f.png" />
+</div>
+</div>
+<p>Perbandingan sebelum dan sesudah dilakukannya penanganan outlier</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df_temp</span> <span class="o">=</span> <span class="n">zscore</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;Volume&#39;</span><span class="p">],</span> <span class="n">window</span><span class="o">=</span><span class="mi">50</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">20</span><span class="p">,</span><span class="mi">10</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">sb</span><span class="o">.</span><span class="n">boxplot</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;Volume&#39;</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">sb</span><span class="o">.</span><span class="n">boxplot</span><span class="p">(</span><span class="n">df_temp</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/94de2567f47ae87c27a2c465ef2e0881b52b71d90874650b8a88b4ca9e4e881d.png" src="_images/94de2567f47ae87c27a2c465ef2e0881b52b71d90874650b8a88b4ca9e4e881d.png" />
+</div>
+</div>
+<p>Selanjutnya melihat data trend di masing-masing kolom</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#Data Trend</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">df</span><span class="p">:</span>
+  <span class="n">df</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">kind</span><span class="o">=</span><span class="s1">&#39;line&#39;</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">4</span><span class="p">),</span> <span class="n">title</span><span class="o">=</span><span class="n">i</span><span class="p">)</span>
+  <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/b8cd460c6970193c9d7c36969ccfe8279fc9cd20acd8bf2971cb6b7b389ee71d.png" src="_images/b8cd460c6970193c9d7c36969ccfe8279fc9cd20acd8bf2971cb6b7b389ee71d.png" />
+<img alt="_images/907ecfeb38f24b9dc9bb42f77821b3e8484d0ecaf2d5ada1984c0e8da0ded7a6.png" src="_images/907ecfeb38f24b9dc9bb42f77821b3e8484d0ecaf2d5ada1984c0e8da0ded7a6.png" />
+<img alt="_images/2d2f728eac32ab7419793415776c97105c7b7ff60d2a6e8620b44a91ec4ea230.png" src="_images/2d2f728eac32ab7419793415776c97105c7b7ff60d2a6e8620b44a91ec4ea230.png" />
+<img alt="_images/4d366322253315db21cb797b692439524ea4b2653938cb6e6341ea127073debb.png" src="_images/4d366322253315db21cb797b692439524ea4b2653938cb6e6341ea127073debb.png" />
+<img alt="_images/1e4355dc9867c5eded8a1851dffcecefcb53faab0d19c788ad4437c29067d9b3.png" src="_images/1e4355dc9867c5eded8a1851dffcecefcb53faab0d19c788ad4437c29067d9b3.png" />
+</div>
+</div>
+<p>Selanjutnya melihat korelasi antara kolom satu dengan kolom lainnya</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
+<span class="n">df_corr</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">corr</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">df_corr</span><span class="p">))</span>
+
+<span class="c1"># Menyiapkan gambar matplotlib</span>
+<span class="n">f</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">11</span><span class="p">,</span> <span class="mi">9</span><span class="p">))</span>
+
+<span class="c1"># Membuat heatmap dengan mask dan proporsi aspek yang benar</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">heatmap</span><span class="p">(</span><span class="n">df_corr</span><span class="p">,</span> <span class="n">square</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">annot</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">linewidths</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s2">&quot;BuPu&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;class &#39;pandas.core.frame.DataFrame&#39;&gt;
+</pre></div>
+</div>
+<img alt="_images/6a57e671ddec157191fe02fcc7b531c2e2b699abd6909ca7a8e21d629211c28b.png" src="_images/6a57e671ddec157191fe02fcc7b531c2e2b699abd6909ca7a8e21d629211c28b.png" />
+</div>
+</div>
+<p>Terlihat tiap kolom kecuali kolom Volume memiliki nilai korelasi yang sangat tinggi (0.99-1), dapat diartikan bahwa tiap tiap kolom saling berhubungan satu sama lain kecuali kolom volume yang memiliki nilai korelasi negatif dengan kolom lainnya.</p>
+</section>
+<section id="verifikasi-kualitas-data">
+<h4>Verifikasi Kualitas Data<a class="headerlink" href="#verifikasi-kualitas-data" title="Link to this heading">#</a></h4>
+<p>Dapat disimpulkan bahwa data yang digunakan terbilang bagus dan cocok untuk dipakai dalam modelling, namun perlu diperhatikan bahwa data perlu masuk ke tahap preprocessing data agar data benar benar siap untuk masuk ke tahap modelling.</p>
+</section>
+</section>
+<section id="pra-pemrosesan-data-data-preprocessing">
+<h3>Pra-pemrosesan Data (Data Preprocessing)<a class="headerlink" href="#pra-pemrosesan-data-data-preprocessing" title="Link to this heading">#</a></h3>
+<p>Menggunakan kolom Open, High, Low, Close-1, Volume sebagai fitur input dan fitur target/output yaitu kolom Close. Kolom Volume menggunakan data yang sudah ditangani outliernya.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">new_df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">by</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Date&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+<span class="n">new_df</span><span class="p">[</span><span class="s1">&#39;Volume&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df_temp</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Menambahkan fitur Close-1 ke dataframe</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">new_df</span><span class="p">[</span><span class="s1">&#39;Close-1&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">new_df</span><span class="p">[</span><span class="s1">&#39;Close&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">shift</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">new_df</span> <span class="o">=</span> <span class="n">new_df</span><span class="o">.</span><span class="n">dropna</span><span class="p">()</span>
+<span class="n">FEATURES</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;High&#39;</span><span class="p">,</span> <span class="s1">&#39;Low&#39;</span><span class="p">,</span> <span class="s1">&#39;Open&#39;</span><span class="p">,</span> <span class="s1">&#39;Close-1&#39;</span><span class="p">,</span> <span class="s1">&#39;Volume&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Memisahkan dataframe menjadi input dan output</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">input_df</span> <span class="o">=</span> <span class="n">new_df</span><span class="p">[</span><span class="n">FEATURES</span><span class="p">]</span>
+
+<span class="n">target_df</span> <span class="o">=</span> <span class="n">new_df</span><span class="p">[</span><span class="s1">&#39;Close&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Melakukan scaling menggunakan Min-Max Scaling yaitu mengubah data sehingga semua nilai berada dalam rentang [0, 1] dengan rumus berikut</p>
+<div class="math notranslate nohighlight">
+\[
+x' = \frac{x - \text{min}(X)}{\text{max}(X) - \text{min}(X)}
+\]</div>
+<p>Di mana:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(x'\)</span> adalah nilai yang dinormalisasi.</p></li>
+<li><p><span class="math notranslate nohighlight">\(x\)</span> adalah nilai asli dari fitur.</p></li>
+<li><p><span class="math notranslate nohighlight">\(\text{min}(X)\)</span> adalah nilai minimum dari fitur dalam dataset.</p></li>
+<li><p><span class="math notranslate nohighlight">\(\text{max}(X)\)</span> adalah nilai maksimum dari fitur dalam dataset.</p></li>
+</ul>
+<p>Min-Max Scaling berguna untuk meningkatkan kinerja LSTM.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.preprocessing</span> <span class="kn">import</span> <span class="n">RobustScaler</span><span class="p">,</span> <span class="n">MinMaxScaler</span>
+
+<span class="c1"># Convert the data to numpy values</span>
+<span class="n">np_data_unscaled</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">input_df</span><span class="p">)</span>
+
+<span class="c1"># Transform the data by scaling each feature to a range between 0 and 1</span>
+<span class="n">scaler</span> <span class="o">=</span> <span class="n">MinMaxScaler</span><span class="p">()</span>
+<span class="n">np_data_scaled</span> <span class="o">=</span> <span class="n">scaler</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">np_data_unscaled</span><span class="p">)</span>
+
+<span class="c1"># Creating a separate scaler that works on a single column for scaling predictions</span>
+<span class="n">scaler_pred</span> <span class="o">=</span> <span class="n">MinMaxScaler</span><span class="p">()</span>
+<span class="n">df_Close</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">target_df</span><span class="p">)</span>
+<span class="n">np_Close_scaled</span> <span class="o">=</span> <span class="n">scaler_pred</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">df_Close</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Selanjutnya mempersiapkan data sebelum masuk ke pemodelan.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sequence_length</span> <span class="o">=</span> <span class="mi">50</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Yang berarti model akan melihat 50 hari sebelumnya untuk memprediksi harga di hari berikutnya. Selanjutnya membagi data untuk data train sebesar 80% dan data test sebesar 20%</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">math</span>
+
+<span class="c1"># Prediction Index</span>
+<span class="n">index_Close</span> <span class="o">=</span> <span class="n">new_df</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">get_loc</span><span class="p">(</span><span class="s2">&quot;Close&quot;</span><span class="p">)</span>
+
+<span class="n">train_data_len</span> <span class="o">=</span> <span class="n">math</span><span class="o">.</span><span class="n">ceil</span><span class="p">(</span><span class="n">np_data_scaled</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="mf">0.8</span><span class="p">)</span>
+
+<span class="c1"># Create the training and test data</span>
+<span class="n">train_data</span> <span class="o">=</span> <span class="n">np_data_scaled</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="n">train_data_len</span><span class="p">,</span> <span class="p">:]</span>
+<span class="n">test_data</span> <span class="o">=</span> <span class="n">np_data_scaled</span><span class="p">[</span><span class="n">train_data_len</span> <span class="o">-</span> <span class="n">sequence_length</span><span class="p">:,</span> <span class="p">:]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Mempartisi data menjadi input (x) dan target (y).</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">partition_dataset</span><span class="p">(</span><span class="n">sequence_length</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
+    <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="p">[],</span> <span class="p">[]</span>
+    <span class="n">data_len</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">sequence_length</span><span class="p">,</span> <span class="n">data_len</span><span class="p">):</span>
+        <span class="n">x</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="n">sequence_length</span><span class="p">:</span><span class="n">i</span><span class="p">,:])</span> <span class="c1">#contains sequence_length values 0-sequence_length * columsn</span>
+        <span class="n">y</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">index_Close</span><span class="p">])</span> <span class="c1">#contains the prediction values for validation,  for single-step prediction</span>
+    
+    <span class="c1"># Convert the x and y to numpy arrays</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+    <span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span>
+
+<span class="c1"># Generate training data and test data</span>
+<span class="n">x_train</span><span class="p">,</span> <span class="n">y_train</span> <span class="o">=</span> <span class="n">partition_dataset</span><span class="p">(</span><span class="n">sequence_length</span><span class="p">,</span> <span class="n">train_data</span><span class="p">)</span>
+<span class="n">x_test</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">partition_dataset</span><span class="p">(</span><span class="n">sequence_length</span><span class="p">,</span> <span class="n">test_data</span><span class="p">)</span>
+
+<span class="c1"># Print the shapes: the result is: (rows, training_sequence, features) (prediction value, )</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">x_train</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="n">y_train</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">x_test</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="n">y_test</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+
+<span class="c1"># Validate that the prediction value and the input match up</span>
+<span class="c1"># The last close price of the second input sample should equal the first prediction value</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">x_train</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="n">sequence_length</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="n">index_Close</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">y_train</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(937, 50, 5) (937,)
+(246, 50, 5) (246,)
+0.19027181688125894
+0.19027181688125894
+</pre></div>
+</div>
+</div>
+</div>
+<p>Dengan begitu data sudah siap digunakan modelling.</p>
+</section>
+<section id="pemodelan-data-data-modelling">
+<h3>Pemodelan Data (Data Modelling)<a class="headerlink" href="#pemodelan-data-data-modelling" title="Link to this heading">#</a></h3>
+<section id="memilih-model">
+<h4>Memilih Model<a class="headerlink" href="#memilih-model" title="Link to this heading">#</a></h4>
+<p>Memilih model yang paling cocok sesuai dengan topik yang dibawa.</p>
+</section>
+<section id="membangun-model">
+<h4>Membangun Model<a class="headerlink" href="#membangun-model" title="Link to this heading">#</a></h4>
+<p>Membangun model yang sudah ditentukan tekniknya sebelumnya</p>
+</section>
+<section id="menilai-model">
+<h4>Menilai Model<a class="headerlink" href="#menilai-model" title="Link to this heading">#</a></h4>
+<p>Mengevaluasi model yang telah dibuat, menjelaskan kekurangan model, dan hal hal yang perlu diperbaiki untuk model nantinya</p>
+</section>
+</section>
+<section id="evaluasi">
+<h3>Evaluasi<a class="headerlink" href="#evaluasi" title="Link to this heading">#</a></h3>
+<p>Evaluasi akhir yang menjelaskan nilai akhir dari proyek, menjelaskan hasil, kesalahan yang mungkin telah dilakukan saat proses, serta kekurangan dari proyek.</p>
+</section>
+<section id="deployment">
+<h3>Deployment<a class="headerlink" href="#deployment" title="Link to this heading">#</a></h3>
+<p>Bagian ini merupakan langkah terakhir di mana model yang sudah dievaluasi dan dianggap cukup baik diimplementasikan seperti aplikasi web, aplikasi mobile dan lain-lain. Deployment dilakukan setelah hasil model dianalisis dan dianggap layak untuk digunakan.</p>
+</section>
+</section>
+<section id="penutup">
+<h2>Penutup<a class="headerlink" href="#penutup" title="Link to this heading">#</a></h2>
+<p>Berisikan ucapan penutup dari laporan proyek sains data.</p>
+</section>
+<section id="daftar-rujukan">
+<h2>Daftar Rujukan<a class="headerlink" href="#daftar-rujukan" title="Link to this heading">#</a></h2>
+<p>Berisikan rujukan rujukan yang membantu saat melakukan proyek sains data.</p>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pendahuluan">Pendahuluan</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#latar-belakang">Latar Belakang</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#masalah">Masalah</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tujuan">Tujuan</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#metodologi">Metodologi</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#memahami-data-data-understanding">Memahami Data (Data Understanding)</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#pengumpulan-data">Pengumpulan Data</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#deskripsi-data">Deskripsi Data</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#eksplorasi-data">Eksplorasi Data</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#verifikasi-kualitas-data">Verifikasi Kualitas Data</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pra-pemrosesan-data-data-preprocessing">Pra-pemrosesan Data (Data Preprocessing)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pemodelan-data-data-modelling">Pemodelan Data (Data Modelling)</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#memilih-model">Memilih Model</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#membangun-model">Membangun Model</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#menilai-model">Menilai Model</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#evaluasi">Evaluasi</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#deployment">Deployment</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#penutup">Penutup</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#daftar-rujukan">Daftar Rujukan</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Moh. Kurnia Agusta
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2024.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
