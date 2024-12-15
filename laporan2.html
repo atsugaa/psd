@@ -458,7 +458,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>C:\Users\atsuga\AppData\Local\Temp\ipykernel_6920\723975748.py:8: SettingWithCopyWarning: 
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>C:\Users\atsuga\AppData\Local\Temp\ipykernel_6884\723975748.py:8: SettingWithCopyWarning: 
 A value is trying to be set on a copy of a slice from a DataFrame.
 Try using .loc[row_indexer,col_indexer] = value instead
 
@@ -573,7 +573,7 @@ memory usage: 37.8+ KB
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>C:\Users\atsuga\AppData\Local\Temp\ipykernel_6920\434109153.py:2: SettingWithCopyWarning: 
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>C:\Users\atsuga\AppData\Local\Temp\ipykernel_6884\434109153.py:2: SettingWithCopyWarning: 
 A value is trying to be set on a copy of a slice from a DataFrame.
 Try using .loc[row_indexer,col_indexer] = value instead
 
@@ -1672,8 +1672,17 @@ Mean Absolute Percentage Error (MAPE): 0.010794763083647737  %
 <span class="n">last_price</span> <span class="o">=</span> <span class="n">scaler</span><span class="o">.</span><span class="n">inverse_transform</span><span class="p">(</span><span class="n">normalized_df</span><span class="p">[[</span><span class="s1">&#39;sell&#39;</span><span class="p">,</span> <span class="s1">&#39;buy&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>
 
 <span class="c1"># Hitung persentase perubahan harian</span>
-<span class="n">predictions_df</span><span class="p">[</span><span class="s1">&#39;sell_change&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">predictions_df</span><span class="p">[</span><span class="s1">&#39;sell&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">pct_change</span><span class="p">()</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span> <span class="o">*</span> <span class="mi">100</span>
-<span class="n">predictions_df</span><span class="p">[</span><span class="s1">&#39;buy_change&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">predictions_df</span><span class="p">[</span><span class="s1">&#39;buy&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">pct_change</span><span class="p">()</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span> <span class="o">*</span> <span class="mi">100</span>
+<span class="c1"># Data pertama dihitung berdasarkan last_price</span>
+<span class="n">predictions_df</span><span class="p">[</span><span class="s1">&#39;sell_change&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">predictions_df</span><span class="p">[</span><span class="s1">&#39;sell&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">pct_change</span><span class="p">()</span> <span class="o">*</span> <span class="mi">100</span>
+<span class="n">predictions_df</span><span class="p">[</span><span class="s1">&#39;buy_change&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">predictions_df</span><span class="p">[</span><span class="s1">&#39;buy&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">pct_change</span><span class="p">()</span> <span class="o">*</span> <span class="mi">100</span>
+
+<span class="c1"># Perubahan untuk data pertama dihitung manual</span>
+<span class="n">predictions_df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">predictions_df</span><span class="o">.</span><span class="n">index</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="s1">&#39;sell_change&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">((</span><span class="n">predictions_df</span><span class="p">[</span><span class="s1">&#39;sell&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="n">last_price</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">])</span> <span class="o">/</span> <span class="n">last_price</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">])</span> <span class="o">*</span> <span class="mi">100</span>
+<span class="n">predictions_df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">predictions_df</span><span class="o">.</span><span class="n">index</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="s1">&#39;buy_change&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">((</span><span class="n">predictions_df</span><span class="p">[</span><span class="s1">&#39;buy&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="n">last_price</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">])</span> <span class="o">/</span> <span class="n">last_price</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">])</span> <span class="o">*</span> <span class="mi">100</span>
+
+<span class="c1"># Ganti nilai NaN untuk baris lainnya dengan 0</span>
+<span class="n">predictions_df</span><span class="p">[</span><span class="s1">&#39;sell_change&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">predictions_df</span><span class="p">[</span><span class="s1">&#39;sell_change&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">predictions_df</span><span class="p">[</span><span class="s1">&#39;buy_change&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">predictions_df</span><span class="p">[</span><span class="s1">&#39;buy_change&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
 
 <span class="c1"># Hitung perubahan total dari hari ini ke hari ketujuh</span>
 <span class="n">total_sell_change</span> <span class="o">=</span> <span class="p">((</span><span class="n">predictions_df</span><span class="p">[</span><span class="s1">&#39;sell&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">last_price</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">])</span> <span class="o">/</span> <span class="n">last_price</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">])</span> <span class="o">*</span> <span class="mi">100</span>
@@ -1695,7 +1704,7 @@ Mean Absolute Percentage Error (MAPE): 0.010794763083647737  %
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Harga terakhir (Hari ini): Sell = 1491087.00, Buy = 1453809.00
 
 Prediksi harga untuk 7 hari ke depan:
-2024-12-16: Sell = 1486341.76 (+0.00%), Buy = 1449195.42 (+0.00%)
+2024-12-16: Sell = 1486341.76 (-0.32%), Buy = 1449195.42 (-0.32%)
 2024-12-17: Sell = 1505951.38 (+1.32%), Buy = 1468245.80 (+1.31%)
 2024-12-18: Sell = 1478960.62 (-1.79%), Buy = 1442247.79 (-1.77%)
 2024-12-19: Sell = 1497490.76 (+1.25%), Buy = 1459678.11 (+1.21%)
@@ -1769,9 +1778,9 @@ C:\Users\atsuga\AppData\Local\Programs\Python\Python312\Lib\site-packages\sklear
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Mean Squared Error: 0.00013822986338231152
-Root Mean Squared Error: 0.011757119689035726
-Mean Absolute Percentage Error (MAPE): 0.011328774674413539 %
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Mean Squared Error: 0.0001350055153148716
+Root Mean Squared Error: 0.011619187377560946
+Mean Absolute Percentage Error (MAPE): 0.011089260681463299 %
 </pre></div>
 </div>
 </div>
@@ -1825,7 +1834,7 @@ Mean Absolute Percentage Error (MAPE): 0.011328774674413539 %
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/7a41a0c3b82cfd6981eab284cd9f7e7a0f4db8e999120a9ad7ff2a28259a26a5.png" src="_images/7a41a0c3b82cfd6981eab284cd9f7e7a0f4db8e999120a9ad7ff2a28259a26a5.png" />
+<img alt="_images/d3a087f52e7bb24686e3b1413fdcbcd4087b4f73e7c7714a3b6c5ed07bd280a2.png" src="_images/d3a087f52e7bb24686e3b1413fdcbcd4087b4f73e7c7714a3b6c5ed07bd280a2.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -1862,8 +1871,17 @@ Mean Absolute Percentage Error (MAPE): 0.011328774674413539 %
 <span class="n">last_price</span> <span class="o">=</span> <span class="n">scaler</span><span class="o">.</span><span class="n">inverse_transform</span><span class="p">(</span><span class="n">normalized_df</span><span class="p">[[</span><span class="s1">&#39;sell&#39;</span><span class="p">,</span> <span class="s1">&#39;buy&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>
 
 <span class="c1"># Hitung persentase perubahan harian</span>
-<span class="n">predictions_df</span><span class="p">[</span><span class="s1">&#39;sell_change&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">predictions_df</span><span class="p">[</span><span class="s1">&#39;sell&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">pct_change</span><span class="p">()</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span> <span class="o">*</span> <span class="mi">100</span>
-<span class="n">predictions_df</span><span class="p">[</span><span class="s1">&#39;buy_change&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">predictions_df</span><span class="p">[</span><span class="s1">&#39;buy&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">pct_change</span><span class="p">()</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span> <span class="o">*</span> <span class="mi">100</span>
+<span class="c1"># Data pertama dihitung berdasarkan last_price</span>
+<span class="n">predictions_df</span><span class="p">[</span><span class="s1">&#39;sell_change&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">predictions_df</span><span class="p">[</span><span class="s1">&#39;sell&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">pct_change</span><span class="p">()</span> <span class="o">*</span> <span class="mi">100</span>
+<span class="n">predictions_df</span><span class="p">[</span><span class="s1">&#39;buy_change&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">predictions_df</span><span class="p">[</span><span class="s1">&#39;buy&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">pct_change</span><span class="p">()</span> <span class="o">*</span> <span class="mi">100</span>
+
+<span class="c1"># Perubahan untuk data pertama dihitung manual</span>
+<span class="n">predictions_df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">predictions_df</span><span class="o">.</span><span class="n">index</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="s1">&#39;sell_change&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">((</span><span class="n">predictions_df</span><span class="p">[</span><span class="s1">&#39;sell&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="n">last_price</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">])</span> <span class="o">/</span> <span class="n">last_price</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">])</span> <span class="o">*</span> <span class="mi">100</span>
+<span class="n">predictions_df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">predictions_df</span><span class="o">.</span><span class="n">index</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="s1">&#39;buy_change&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">((</span><span class="n">predictions_df</span><span class="p">[</span><span class="s1">&#39;buy&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="n">last_price</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">])</span> <span class="o">/</span> <span class="n">last_price</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">])</span> <span class="o">*</span> <span class="mi">100</span>
+
+<span class="c1"># Ganti nilai NaN untuk baris lainnya dengan 0</span>
+<span class="n">predictions_df</span><span class="p">[</span><span class="s1">&#39;sell_change&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">predictions_df</span><span class="p">[</span><span class="s1">&#39;sell_change&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">predictions_df</span><span class="p">[</span><span class="s1">&#39;buy_change&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">predictions_df</span><span class="p">[</span><span class="s1">&#39;buy_change&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
 
 <span class="c1"># Hitung perubahan total dari hari ini ke hari ketujuh</span>
 <span class="n">total_sell_change</span> <span class="o">=</span> <span class="p">((</span><span class="n">predictions_df</span><span class="p">[</span><span class="s1">&#39;sell&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">last_price</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">])</span> <span class="o">/</span> <span class="n">last_price</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">])</span> <span class="o">*</span> <span class="mi">100</span>
@@ -1885,16 +1903,16 @@ Mean Absolute Percentage Error (MAPE): 0.011328774674413539 %
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Harga terakhir (Hari ini): Sell = 1491087.00, Buy = 1453809.00
 
 Prediksi harga untuk 7 hari ke depan:
-2024-12-16: Sell = 1485146.20 (+0.00%), Buy = 1448065.39 (+0.00%)
-2024-12-17: Sell = 1507989.40 (+1.54%), Buy = 1470176.99 (+1.53%)
-2024-12-18: Sell = 1465438.99 (-2.82%), Buy = 1429048.51 (-2.80%)
-2024-12-19: Sell = 1500303.99 (+2.38%), Buy = 1461134.46 (+2.25%)
-2024-12-20: Sell = 1480110.28 (-1.35%), Buy = 1438499.18 (-1.55%)
-2024-12-21: Sell = 1515119.11 (+2.37%), Buy = 1482288.29 (+3.04%)
-2024-12-22: Sell = 1424968.41 (-5.95%), Buy = 1395144.57 (-5.88%)
+2024-12-16: Sell = 1485730.90 (-0.36%), Buy = 1448575.55 (-0.36%)
+2024-12-17: Sell = 1508329.47 (+1.52%), Buy = 1470533.05 (+1.52%)
+2024-12-18: Sell = 1454351.82 (-3.58%), Buy = 1418194.83 (-3.56%)
+2024-12-19: Sell = 1518326.92 (+4.40%), Buy = 1479709.70 (+4.34%)
+2024-12-20: Sell = 1397294.17 (-7.97%), Buy = 1357342.05 (-8.27%)
+2024-12-21: Sell = 1681061.43 (+20.31%), Buy = 1646927.61 (+21.33%)
+2024-12-22: Sell = 995910.75 (-40.76%), Buy = 967906.96 (-41.23%)
 
 Perubahan total dari hari ini ke hari ketujuh:
-Sell: -4.43%, Buy: -4.04%
+Sell: -33.21%, Buy: -33.42%
 </pre></div>
 </div>
 <div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>C:\Users\atsuga\AppData\Local\Programs\Python\Python312\Lib\site-packages\sklearn\base.py:493: UserWarning: X does not have valid feature names, but BaggingRegressor was fitted with feature names
